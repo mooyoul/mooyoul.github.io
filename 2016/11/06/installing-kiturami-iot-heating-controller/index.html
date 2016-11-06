@@ -1,28 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>init 1</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
   
-  <link href="/atom.xml" rel="self"/>
+  <title>귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기 | init 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="귀뚜라미보일러 IoT 온도 조절기작년즈음 귀뚜라미보일러에서 Wi-Fi를 통해 스마트폰 제어가 가능한 온도 조절기를 발매했다는 소식을 들었습니다만,아쉽게도 최신형 보일러에서만 사용할 수 있어 써볼 수가 없었습니다.
+어느새 기억에서 잊혀져가고 있다가, 최근 클리앙의 한 사용기를 보고 구형 보일러에서도 사용이 가능하다는 것을 알게 되었죠.
+그런데 해당 사용기에서">
+<meta property="og:type" content="article">
+<meta property="og:title" content="귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기">
+<meta property="og:url" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/index.html">
+<meta property="og:site_name" content="init 1">
+<meta property="og:description" content="귀뚜라미보일러 IoT 온도 조절기작년즈음 귀뚜라미보일러에서 Wi-Fi를 통해 스마트폰 제어가 가능한 온도 조절기를 발매했다는 소식을 들었습니다만,아쉽게도 최신형 보일러에서만 사용할 수 있어 써볼 수가 없었습니다.
+어느새 기억에서 잊혀져가고 있다가, 최근 클리앙의 한 사용기를 보고 구형 보일러에서도 사용이 가능하다는 것을 알게 되었죠.
+그런데 해당 사용기에서">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06514.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06515.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06522.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06523.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06523.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06526.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06529.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06530.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06532.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06533.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06534.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06536.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06540.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06542.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06543.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06546.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06551.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06553.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06549.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06562.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06567.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06557.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06569.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06571.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06572.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06574.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06583.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06587.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06588.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06588.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/well-known-ports.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/curl.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/admin.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/curl-head.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/ping.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06591.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06592.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06593.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/infra.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06576.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/packet-1.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/packet-2.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/packet-3.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/https-1.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/poodle.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/missing-hsts.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/https-2.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/https-3.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/https-4.png">
+<meta property="og:updated_time" content="2016-11-06T04:45:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기">
+<meta name="twitter:description" content="귀뚜라미보일러 IoT 온도 조절기작년즈음 귀뚜라미보일러에서 Wi-Fi를 통해 스마트폰 제어가 가능한 온도 조절기를 발매했다는 소식을 들었습니다만,아쉽게도 최신형 보일러에서만 사용할 수 있어 써볼 수가 없었습니다.
+어느새 기억에서 잊혀져가고 있다가, 최근 클리앙의 한 사용기를 보고 구형 보일러에서도 사용이 가능하다는 것을 알게 되었죠.
+그런데 해당 사용기에서">
+<meta name="twitter:image" content="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/DSC06514.jpg">
   
-  <link href="https://mooyoul.github.io/"/>
-  <updated>2016-11-06T04:45:58.000Z</updated>
-  <id>https://mooyoul.github.io/</id>
+    <link rel="alternate" href="/atom.xml" title="init 1" type="application/atom+xml">
   
-  <author>
-    <name>MooYeol Prescott Lee</name>
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+</head>
+
+  
+    <body>
+  
+      <div id="container" class="container">
+        <article id="post-installing-kiturami-iot-heating-controller" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+  <nav id="main-nav" class="main-nav">
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기</title>
-    <link href="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/"/>
-    <id>https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/</id>
-    <published>2016-11-06T00:37:39.000Z</published>
-    <updated>2016-11-06T04:45:58.000Z</updated>
+      <a class="main-nav-link" href="/">Home</a>
     
-    <content type="html"><![CDATA[<h1 id="귀뚜라미보일러-IoT-온도-조절기"><a href="#귀뚜라미보일러-IoT-온도-조절기" class="headerlink" title="귀뚜라미보일러 IoT 온도 조절기"></a>귀뚜라미보일러 IoT 온도 조절기</h1><p>작년즈음 귀뚜라미보일러에서 Wi-Fi를 통해 스마트폰 제어가 가능한 온도 조절기를 발매했다는 소식을 들었습니다만,<br>아쉽게도 최신형 보일러에서만 사용할 수 있어 써볼 수가 없었습니다.</p>
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/atom.xml">RSS</a>
+    
+      <a class="main-nav-link" href="https://github.com/mooyoul">Github</a>
+    
+      <a class="main-nav-link" href="https://www.linkedin.com/in/mooyoul">LinkedIn</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <h1 id="귀뚜라미보일러-IoT-온도-조절기"><a href="#귀뚜라미보일러-IoT-온도-조절기" class="headerlink" title="귀뚜라미보일러 IoT 온도 조절기"></a>귀뚜라미보일러 IoT 온도 조절기</h1><p>작년즈음 귀뚜라미보일러에서 Wi-Fi를 통해 스마트폰 제어가 가능한 온도 조절기를 발매했다는 소식을 들었습니다만,<br>아쉽게도 최신형 보일러에서만 사용할 수 있어 써볼 수가 없었습니다.</p>
 <p>어느새 기억에서 잊혀져가고 있다가, 최근 <a href="http://clien.net/cs2/bbs/board.php?bo_table=use&amp;wr_id=943776&amp;sca=&amp;sfl=wr_subject&amp;stx=%EA%B7%80%EB%9A%9C%EB%9D%BC%EB%AF%B8" target="_blank" rel="external">클리앙의 한 사용기</a>를 보고 구형 보일러에서도 사용이 가능하다는 것을 알게 되었죠.</p>
 <p>그런데 해당 사용기에서 MITM (Man in the middle, 중간자 공격)에 취약하다는 언급이 <a href="http://clien.net/cs2/bbs/board.php?bo_table=news&amp;wr_id=2266176&amp;sca=&amp;sfl=wr_subject&amp;stx=%EA%B7%80%EB%9A%9C%EB%9D%BC%EB%AF%B8" target="_blank" rel="external">클리앙 새로운 소식의 뉴스로 등장</a>하게 되면서, 유저들의 수 많은 질타를 받게 됩니다.</p>
 <blockquote>
@@ -175,86 +275,105 @@
 <p>이외에는 큰 차이가 없어 자세히 기술하지는 않습니다.</p>
 <h2 id="다음-할일"><a href="#다음-할일" class="headerlink" title="다음 할일"></a>다음 할일</h2><p>어느정도 내부를 뜯어보았으니, 이 다음은 Homebridge plugin을 만들어 Homekit에 붙여볼 차례입니다.</p>
 <p>이 부분은 진행인 작업이고, 완료되면 별도 포스트로 찾아뵙도록 하겠습니다!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;귀뚜라미보일러-IoT-온도-조절기&quot;&gt;&lt;a href=&quot;#귀뚜라미보일러-IoT-온도-조절기&quot; class=&quot;headerlink&quot; title=&quot;귀뚜라미보일러 IoT 온도 조절기&quot;&gt;&lt;/a&gt;귀뚜라미보일러 IoT 온도 조절기&lt;/h1&gt;&lt;p&gt;작년즈음 귀
-    
-    </summary>
-    
-      <category term="gadget" scheme="https://mooyoul.github.io/categories/gadget/"/>
-    
-    
-      <category term="iot, thermometer, kiturami, research, network" scheme="https://mooyoul.github.io/tags/iot-thermometer-kiturami-research-network/"/>
-    
-  </entry>
+
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2016/11/06/installing-kiturami-iot-heating-controller/" class="article-date">
+  <time datetime="2016-11-06T00:37:39.000Z" itemprop="datePublished">2016-11-06</time>
+</a>
+
+        </li>
+        
+          <li>
+            <span class="label">Category:</span>
+            
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/gadget/">gadget</a>
+  </div>
+
+
+          </li>
+        
+        
+          <li>
+            <span class="label">Tag:</span>
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iot-thermometer-kiturami-research-network/">iot, thermometer, kiturami, research, network</a></li></ul>
+
+
+          </li>
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
   
-  <entry>
-    <title>집의 조명 시스템을 Hue로 전환하다 - 1편</title>
-    <link href="https://mooyoul.github.io/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/"/>
-    <id>https://mooyoul.github.io/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/</id>
-    <published>2016-09-04T22:59:14.000Z</published>
-    <updated>2016-09-09T22:17:52.000Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="Philips-Hue"><a href="#Philips-Hue" class="headerlink" title="Philips Hue"></a>Philips Hue</h4><p>Philips Hue는 <strong>Personal wireless lighting</strong>, 개인 무선 조명을 슬로건으로 가지는 Philips의 조명 제품군입니다.<br>일반적인 LED 조명들과 동일하게 저전력 고효율의 성능을 가지고 있고, 밝기를 조정하는 디밍 (Dimming)이 가능할 뿐만 아니라 원하는 색상을 색상 피커 (Color picker)에서 찍어 표현할 수도 있습니다.<br>무엇보다 전구별로 각각 다른 색과 밝기를 조합해 장면 (Scene)을 만들어내 특유의 무드를 연출하기 좋죠.</p>
-<p>램프들은 지그비(Zigbee)라는 2.4Ghz대역을 사용하는 무선 통신을 통해 브릿지와 연결되고, 앱과 Siri를 통해 제어가 가능합니다.<br>Zigbee를 사용하기 때문에 Bluetooth로 페어링되는 다른 조명들과 달리 커버리지가 훨씬 넓고 복수의 조명을 동시 제어(그룹 제어)할 수 있으며, 집 밖에서도 제어가 가능합니다.<br><a href="http://www.developers.meethue.com/" target="_blank" rel="external">공개 API</a>가 있어 서드파티 애플리케이션을 만들수도 있고요.</p>
-<p>자세한 내용은 아래 링크와 비디오를 참고해보세요.</p>
-<div class="video-container"><iframe src="//www.youtube.com/embed/lCv4r3wgsPQ" frameborder="0" allowfullscreen></iframe></div>
-<div class="video-container"><iframe src="//www.youtube.com/embed/griC5Tu0R2A" frameborder="0" allowfullscreen></iframe></div>
-<ul>
-<li><a href="http://www2.meethue.com/en-us/" target="_blank" rel="external">Hue 공식 소개 페이지 - Meet Hue (영문/미국)</a></li>
-<li><a href="http://www2.meethue.com/ko-kr/" target="_blank" rel="external">Hue 공식 소개 페이지 - Meet Hue (한글/대한민국)</a> - <em>일부 제품군이 제외되어 있습니다</em></li>
-</ul>
-<h4 id="지르고보자"><a href="#지르고보자" class="headerlink" title="지르고보자"></a>지르고보자</h4><p>올해 7월, <a href="http://slickdeals.net/f/8918479-philips-hue-led-white-and-color-ambiance-starter-kit-multicolor-125-free-shipping" target="_blank" rel="external">Slickdeals를 둘러보던 중 Bestbuy via eBay에서 2세대 Hue white and color ambiance starter kit을 $119에 판매한다는 쓰레드</a>를 보자마자 싸다는 이유로 무작정 스타터 킷을 주문했습니다.<br><img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/starter-kit-order-details.png" alt="싸..싸다!" title="싸..싸다!"></p>
-<p>1세대도 아닌 2세대 스타터킷이 $199에 주로 판매되는걸 생각한다면 엄청난 딜이었죠.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/must-buy.jpg" alt="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:attachment/1000685049.jpg" title="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:attachment/1000685049.jpg"> 
-<p>이미 1세대 스타터킷을 구매해 사용하고 있었지만 2세대는 아래와 같은 변경사항이 있어서 더더욱 유혹을 뿌리칠 수 없었습니다.<br>그래서 일단 질렀습니다.</p>
-<h5 id="2세대-Hue는-무엇이-바뀌었나"><a href="#2세대-Hue는-무엇이-바뀌었나" class="headerlink" title="2세대 Hue는 무엇이 바뀌었나?"></a>2세대 Hue는 무엇이 바뀌었나?</h5><p>2세대 Hue 제품군은 크게 다음과 같은 변화가 있었습니다:</p>
-<blockquote>
-<p>2세대 브릿지는 Apple의 Homekit을 지원 (Homekit 인증을 위해 하드웨어 일부 변경), 이 덕에 Siri를 통해 음성 제어가 가능<br>2세대 White and color ambiance bulb는 밝기가 1세대에 비해 더 밝아짐<br>Lightstrip은 Lightstrip Plus라는 이름으로 변경되고 밝기가 밝아졌으며, 여러개의 스트립을 연결하여 길이 연장이 가능<br>거치형인 Iris가 단종되고 이를 대체하는 Bloom 출시. Iris 대비 크기가 작아짐<br>이동 거치가 가능한 충전식 조명 Hue Go 출시<br>Hue White 및 White ambiance bulb 출시</p>
-</blockquote>
-<h5 id="미국에서-구매한-Hue-한국에서-사용할-수-있을까"><a href="#미국에서-구매한-Hue-한국에서-사용할-수-있을까" class="headerlink" title="미국에서 구매한 Hue, 한국에서 사용할 수 있을까?"></a>미국에서 구매한 Hue, 한국에서 사용할 수 있을까?</h5><p>막상 지르고 나서 정신을 차려보니 전압이 호환되는지 확인을 안해봐서 걱정이 되었습니다.<br>싸다고 일단 질렀는데, 전압이 안맞으면 낭패니까요…</p>
-<p>브릿지부터 찾아봅니다. 1세대처럼 DC 어댑터를 쓸테고, 요즘에 나오는 DC 어댑터들은 대개 프리볼트지만…<br>혹시 모르니까 <a href="http://www2.meethue.com/en-us/productdetail/philips-hue-bridge" target="_blank" rel="external">미국 Hue 홈페이지의 Hue Bridge 페이지</a>에서 찾아봅니다.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/bridge-spec.png" alt="Specifications of Hue Bridge" title="Specifications of Hue Bridge">
-<p>오, 역시 프리볼트를 지원합니다!<br>게다가 5V 2A 입력이라 PoE Splitter를 통해 전원을 공급해도 되고,<br>어댑터 잭(꼬다리)를 잘라내 USB로 개조한다면 멀티포트 USB 충전기에 꽂아 콘센트 공간을 줄일수도 있습니다.</p>
-<p>다음, <a href="http://www2.meethue.com/en-us/productdetail/philips-hue-white-and-color-ambiance---extension-bulbs" target="_blank" rel="external">White and color ambiance bulb</a>을 봅니다.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/bulb-spec.png" alt="Specifications of Hue White and color ambiance bulb (2nd gen)" title="Specifications of Hue White and color ambiance bulb (2nd gen)">
-<p>으..음…?!?!?!?!???!?!?!!!<br>아닐거야.. 부정하며 아마존의 Product Q&amp;A를 찾아봅니다…</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/amazon-qna.png" alt="No. Only 120v..." title="No. Only 120v...">
-<p>오.. 마이… 갓….  </p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/goja.gif" alt="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:%EA%B3%A0%EC%9E%90%EB%9D%BC%EB%8B%88.gif" title="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:%EA%B3%A0%EC%9E%90%EB%9D%BC%EB%8B%88.gif">
-<p>사실을 받아들이기 싫어서… 어떻게 정확한 정보를 알 수 없을까? 고민하다가<br>미국에 판매되는 전기제품들은 FCC 인증을 받는다는 것을 떠올리고 FCC ID로 데이터를 찾아봅니다.<br>그리고… <a href="https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Sum&amp;calledFromFrame=N&amp;RequestTimeout=500&amp;application_id=KCWgrlBX4C%2F7LuE4veHPag%3D%3D&amp;fcc_id=O3M9290011419X" target="_blank" rel="external">발견한 정확한 FCC 인증정보</a>! 넘나 다행인것…</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/fcc-bulb.png" alt="FCC Exhibit Report of O3M9290011419X - Hue White and color ambiance bulb (2nd gen)" title="FCC Exhibit Report of O3M9290011419X - Hue White and color ambiance bulb (2nd gen)">
-<p>저기 보이세요? ACDC board 120V230V!!!!<br>어깨너머 하드웨어를 배운 저는 저게 <em>(특수문자가 짤려서)</em> <strong>AC/DC board 120V~230V</strong>. 교류 120v~230v 입력을 받는 AC to DC 회로, 그러니까 프리볼트를 의미한다는것을 곧바로 알아챘습니다.<br>그리고 뒤늦게 <a href="https://www.quora.com/Will-Philips-Hue-work-with-220v" target="_blank" rel="external">Quora에 올라온 Will Philips Hue work with 220v?</a>도 발견했죠…</p>
-<p>요악하자면, <strong>Hue White ambiance bulb/Hue White bulb를 제외한 대부분의 제품군들은 220v에서도 사용이 가능</strong>합니다.</p>
-<p>지금 이 포스트를 쓰고 있는 시점에도 Hue Bridge (2nd gen), Hue Lightstrip Plus, Hue White and color ambiance bulb (2nd gen), Hue Iris를 돼지코만 끼워서 잘 사용하고 있습니다.</p>
-<h4 id="2세대-스타터킷-수령-및-설치"><a href="#2세대-스타터킷-수령-및-설치" class="headerlink" title="2세대 스타터킷 수령 및 설치"></a>2세대 스타터킷 수령 및 설치</h4><p>2세대 스타터킷을 수령해 기존 1세대 브릿지와 램프를 교체하고 나니 집의 조명 시스템을 모두 Hue로 변경하면 좋겠단 생각이 들었습니다.<br><del>인간의 욕심은 끝이 없다 (…)</del></p>
-<h4 id="첫번째-추가-램프-구입-Lightstrip-Plus-Iris"><a href="#첫번째-추가-램프-구입-Lightstrip-Plus-Iris" class="headerlink" title="첫번째 추가 램프 구입 - Lightstrip Plus, Iris"></a>첫번째 추가 램프 구입 - Lightstrip Plus, Iris</h4><img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/iris-order-details.png" alt="Lightstip Plus / Iris order details" title="Lightstip Plus / Iris order details">
-<p><del>기프트카드 털어내기</del></p>
-<p>첫번째로 추가 구매한 램프는 Hue Lightstrip Plus와 Hue Iris입니다.<br>Hue Iris는 벽을 향해 조명을 쏴서 간접 조명으로 사용하고, Lightstrip Plus 또한 천장에 설치된 천장등의 외곽을 따라 간접 조명으로 사용해보고 싶었습니다.<br>무엇보다 천장등에 설치된 FL 형광등 전체를 Lightstrip Plus를 조각내 만든 LED Bar로 교체하기 위해서는 사전 테스트가 필요하기도 했고요.</p>
-<p>그리고 수령샷.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/IMG_2811.jpg" alt="Package of Hue Lightstrip Plus / Hue Iris" title="Package of Hue Lightstrip Plus / Hue Iris">
-<p>Lightstrip Plus를 열어보면 이렇게 생겼습니다.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/20160903_010727.jpg" alt="Package of Hue Lightstrip Plus" title="Package of Hue Lightstrip Plus">
-<p>Iris는 허겁지겁 박스를 뜯고 테스트를 하느라 따로 개봉샷을 찍어둔게 없어 실 사용샷으로 대체합니다.<br>설치는 그냥 콘센트에 꽂고 앱에서 초기 페어링만하는게 전부라 따로 설명할 내용이 없네요;;</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/20160907_051539.jpg" alt="Hue Iris was installed behind TV" title="Hue Iris was installed behind TV">
-<h4 id="Lightstrip-Plus를-천장-간접조명으로-설치"><a href="#Lightstrip-Plus를-천장-간접조명으로-설치" class="headerlink" title="Lightstrip Plus를 천장 간접조명으로 설치"></a>Lightstrip Plus를 천장 간접조명으로 설치</h4><p>기존 거실등은 2개의 전원이 내려오고, 각 전원은 2개의 EL 램프가 연결되어 총 4개의 램프로 구성되어 있었습니다.</p>
-<p>이 중, 한 전원에 연결된</p>
-<p>기본적으로 미국에서 구입한 Hue Lightstrip은 11자 110v US 플러그를 사용하기 때문에  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Philips-Hue&quot;&gt;&lt;a href=&quot;#Philips-Hue&quot; class=&quot;headerlink&quot; title=&quot;Philips Hue&quot;&gt;&lt;/a&gt;Philips Hue&lt;/h4&gt;&lt;p&gt;Philips Hue는 &lt;strong&gt;Personal wire
-    
-    </summary>
-    
-      <category term="gadget" scheme="https://mooyoul.github.io/categories/gadget/"/>
-    
-    
-      <category term="draft, iot, hue, diy" scheme="https://mooyoul.github.io/tags/draft-iot-hue-diy/"/>
-    
-  </entry>
+<nav id="article-nav" class="article-nav">
   
-</feed>
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">집의 조명 시스템을 Hue로 전환하다 - 1편</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>init 1 - MooYeol Prescott Lee</p>
+
+
+      </div>
+    </footer>
+
+      
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83917556-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+    </div>
+  </body>
+</html>
