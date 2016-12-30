@@ -1,28 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>init 1</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
   
-  <link href="/atom.xml" rel="self"/>
+  <title>Terraform 101 | init 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TerraformTerraform은 Infrastructure as code를 모토로 하는 Hashicorp의 오픈소스 도구입니다.
+인프라 구성을 코드를 통해 효과적이고 안전하게 만들고, 변경하고, 버저닝할 수 있습니다.
+SVN, Git과 같은 버전 제어 시스템과 함께 사용한다면 다른 사람과 함께 구성을 변경할 수 있으며,변경 이력을 투명하게 살펴볼 수">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Terraform 101">
+<meta property="og:url" content="https://mooyoul.github.io/2016/12/19/Terraform-101/index.html">
+<meta property="og:site_name" content="init 1">
+<meta property="og:description" content="TerraformTerraform은 Infrastructure as code를 모토로 하는 Hashicorp의 오픈소스 도구입니다.
+인프라 구성을 코드를 통해 효과적이고 안전하게 만들고, 변경하고, 버저닝할 수 있습니다.
+SVN, Git과 같은 버전 제어 시스템과 함께 사용한다면 다른 사람과 함께 구성을 변경할 수 있으며,변경 이력을 투명하게 살펴볼 수">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/hello-terraform.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-apply.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/ec2-dashboard-after-apply.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-show.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-after-modification.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-apply-after-modification.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/ec2-dashboard-after-modification-apply.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-destroy.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-destroy-confirmation.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-destroy.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-with-dependency.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-apply-with-dependency.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-graph.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-graph-graphviz.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-graph-with-non-dependent-resource.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-graph-graphviz-with-non-dependent-resource.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-destroy-for-review-pararrel.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-for-review-pararrel.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-apply-for-review-pararrel.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-apply-with-provisoner.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-provisoner-local-exec-result.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-asking-variable.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-asking-variable.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-map.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-apply-with-output-variables.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-output.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-get.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-plan-module-depth.png">
+<meta property="og:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform-consul.png">
+<meta property="og:updated_time" content="2016-12-30T23:18:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Terraform 101">
+<meta name="twitter:description" content="TerraformTerraform은 Infrastructure as code를 모토로 하는 Hashicorp의 오픈소스 도구입니다.
+인프라 구성을 코드를 통해 효과적이고 안전하게 만들고, 변경하고, 버저닝할 수 있습니다.
+SVN, Git과 같은 버전 제어 시스템과 함께 사용한다면 다른 사람과 함께 구성을 변경할 수 있으며,변경 이력을 투명하게 살펴볼 수">
+<meta name="twitter:image" content="https://mooyoul.github.io/2016/12/19/Terraform-101/terraform.png">
   
-  <link href="https://mooyoul.github.io/"/>
-  <updated>2016-12-30T23:18:38.000Z</updated>
-  <id>https://mooyoul.github.io/</id>
+    <link rel="alternate" href="/atom.xml" title="init 1" type="application/atom+xml">
   
-  <author>
-    <name>MooYeol Prescott Lee</name>
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+</head>
+
+  
+    <body>
+  
+      <div id="container" class="container">
+        <article id="post-Terraform-101" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+  <nav id="main-nav" class="main-nav">
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Terraform 101</title>
-    <link href="https://mooyoul.github.io/2016/12/19/Terraform-101/"/>
-    <id>https://mooyoul.github.io/2016/12/19/Terraform-101/</id>
-    <published>2016-12-18T18:24:42.000Z</published>
-    <updated>2016-12-30T23:18:38.000Z</updated>
+      <a class="main-nav-link" href="/">Home</a>
     
-    <content type="html"><![CDATA[<img src="/2016/12/19/Terraform-101/terraform.png" alt="Terraform" title="Terraform">
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/atom.xml">RSS</a>
+    
+      <a class="main-nav-link" href="https://github.com/mooyoul">Github</a>
+    
+      <a class="main-nav-link" href="https://www.linkedin.com/in/mooyoul">LinkedIn</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Terraform 101
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <img src="/2016/12/19/Terraform-101/terraform.png" alt="Terraform" title="Terraform">
 <h1 id="Terraform"><a href="#Terraform" class="headerlink" title="Terraform"></a>Terraform</h1><p>Terraform은 <strong>Infrastructure as code</strong>를 모토로 하는 <a href="https://www.hashicorp.com/" target="_blank" rel="external">Hashicorp</a>의 오픈소스 도구입니다.</p>
 <p>인프라 구성을 코드를 통해 효과적이고 안전하게 만들고, 변경하고, 버저닝할 수 있습니다.</p>
 <p>SVN, Git과 같은 버전 제어 시스템과 함께 사용한다면 다른 사람과 함께 구성을 변경할 수 있으며,<br>변경 이력을 투명하게 살펴볼 수 있고, 코드로 작성되므로 자동화가 가능합니다.</p>
@@ -407,262 +489,105 @@
 <li><a href="https://github.com/hashicorp/terraform/pull/10950" target="_blank" rel="external">Terraform PR #10950 - website: Correct unrelated contents on env vars in variables page</a></li>
 <li><a href="https://github.com/hashicorp/consul/pull/2620" target="_blank" rel="external">Consul PR #2620 - Add Seoul region to the map for ubuntu</a></li>
 </ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;img src=&quot;/2016/12/19/Terraform-101/terraform.png&quot; alt=&quot;Terraform&quot; title=&quot;Terraform&quot;&gt;
-&lt;h1 id=&quot;Terraform&quot;&gt;&lt;a href=&quot;#Terraform&quot; class=&quot;headerl
-    
-    </summary>
-    
-      <category term="devops" scheme="https://mooyoul.github.io/categories/devops/"/>
-    
-    
-      <category term="devops, terraform, aws, infrastructure, hashicorp" scheme="https://mooyoul.github.io/tags/devops-terraform-aws-infrastructure-hashicorp/"/>
-    
-  </entry>
+
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2016/12/19/Terraform-101/" class="article-date">
+  <time datetime="2016-12-18T18:24:42.000Z" itemprop="datePublished">2016-12-19</time>
+</a>
+
+        </li>
+        
+          <li>
+            <span class="label">Category:</span>
+            
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/devops/">devops</a>
+  </div>
+
+
+          </li>
+        
+        
+          <li>
+            <span class="label">Tag:</span>
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/devops-terraform-aws-infrastructure-hashicorp/">devops, terraform, aws, infrastructure, hashicorp</a></li></ul>
+
+
+          </li>
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
   
-  <entry>
-    <title>귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기</title>
-    <link href="https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/"/>
-    <id>https://mooyoul.github.io/2016/11/06/installing-kiturami-iot-heating-controller/</id>
-    <published>2016-11-06T00:37:39.000Z</published>
-    <updated>2016-11-06T07:16:14.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="귀뚜라미보일러-IoT-온도-조절기"><a href="#귀뚜라미보일러-IoT-온도-조절기" class="headerlink" title="귀뚜라미보일러 IoT 온도 조절기"></a>귀뚜라미보일러 IoT 온도 조절기</h1><p>작년즈음 귀뚜라미보일러에서 Wi-Fi를 통해 스마트폰 제어가 가능한 온도 조절기를 발매했다는 소식을 들었습니다만,<br>아쉽게도 최신형 보일러에서만 사용할 수 있어 써볼 수가 없었습니다.</p>
-<p>어느새 기억에서 잊혀져가고 있다가, 최근 <a href="http://clien.net/cs2/bbs/board.php?bo_table=use&amp;wr_id=943776&amp;sca=&amp;sfl=wr_subject&amp;stx=%EA%B7%80%EB%9A%9C%EB%9D%BC%EB%AF%B8" target="_blank" rel="external">클리앙의 한 사용기</a>를 보고 구형 보일러에서도 사용이 가능하다는 것을 알게 되었죠.</p>
-<p>그런데 해당 사용기에서 MITM (Man in the middle, 중간자 공격)에 취약하다는 언급이 <a href="http://clien.net/cs2/bbs/board.php?bo_table=news&amp;wr_id=2266176&amp;sca=&amp;sfl=wr_subject&amp;stx=%EA%B7%80%EB%9A%9C%EB%9D%BC%EB%AF%B8" target="_blank" rel="external">클리앙 새로운 소식의 뉴스로 등장</a>하게 되면서, 유저들의 수 많은 질타를 받게 됩니다.</p>
-<blockquote>
-<p>현 시점에서는 <strong>안드로이드 사용자에 대해서만</strong> HTTPS를 사용하도록 API가 새로 만들어지고, App이 업데이트 되었습니다.</p>
-</blockquote>
-<p>Philips의 Hue, Xiaomi의 Home Gateway를 사용하고 있는 중인데, 국내 IoT 제품들의 완성도를 구경해보고도 싶고, 무엇보다 최근에 발견한 <a href="https://github.com/nfarina/homebridge" target="_blank" rel="external">Homebridge</a>라는 Node.js 기반 Homekit API 에뮬레이션 서버에 붙여보고 싶은 욕심이 들더라고요.</p>
-<p>그래서.. 질렀고, 어제 수령해서 설치했습니다.</p>
-<h2 id="개봉기"><a href="#개봉기" class="headerlink" title="개봉기"></a>개봉기</h2><img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06514.jpg" alt="패키지" title="패키지"> 
-<p>패키지는 A4 크기의 소설책 한권 수준의 크기입니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06515.jpg" alt="패키지 옆면" title="패키지 옆면">
-<p>보일러 및 온도 조절기에 따라 신형 (NCTR-10WIFI) / 순간식 (CTR-15WIFI) / 저탕식 (CTR-15WIFI) 로 구분됩니다.<br>CTR-15WIFI의 경우 순간식/저탕식 구분이 있습니다만, 기기 내 별도 설정 메뉴에 접근해서 변경이 가능합니다.</p>
-<p>저는 순간식 모델입니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06522.jpg" alt="패키지 구성" title="패키지 구성">
-<p>패키지 구성은 온도 조절기 본체, 백플레이트, 백플레이트 고정 나사, 설명서가 전부입니다.<br>저는 패키지에 포함된 백플레이트 고정 나사가 짧아서 기존 나사를 재활용했습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06523.jpg" alt="기존 온도 조절기가 설치되어 있는 모습" title="기존 온도 조절기가 설치되어 있는 모습">
-<p>기존 온도 조절기가 설치되어 있는 모습니다. (좌하단)</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06523.jpg" alt="CTR-5700PLUS 조절기" title="CTR-5700PLUS 조절기">
-<p>기존에 설치된 온도 조절기는 CTR-5700PLUS 모델인데, 이 모델은 보일러 모델에 따라 순간식/저탕식이 나뉩니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06526.jpg" alt="CTR-5700PLUS 조절기 후면" title="CTR-5700PLUS 조절기 후면">
-<p>백플레이트는 기본적으로 장착된 상태인데, 탈거한 모습입니다. 캐패시터가 꽤 눈에띄네요.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06529.jpg" alt="CTR-15WIFI 옆면" title="CTR-15WIFI 옆면">
-<p>옆을 보면 본체 하우징을 탈거할수 있는 홈이 보입니다.<br>탑 (액정측)하우징에는 걸쇠가, 바텀 하우징에는 홀이 있고 걸쇠가 홀에 걸치는 방식으로 본체 하우징이 고정되는 방식입니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06530.jpg" alt="CTR-15WIFI 기판" title="CTR-15WIFI 기판">
-<p>궁금한걸 못참는 공돌이라 설치 전에 후다닥 뜯어봅니다.<br>역시나 캐패시터가 크고 아릅답..지는 않습니다. </p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06532.jpg" alt="CTR-15WIFI 기판 옆면" title="CTR-15WIFI 기판 옆면">
-<p>궁금헸던 MCU와 Wi-FI 칩셋은 디스플레이 아래에 위치하고 있습니다.<br>아쉽게도 디스플레이 패널 상단이 납땜되어 있어 들어내서 확인할 수는 없었습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06533.jpg" alt="CTR-15WIFI 기판 상단부" title="CTR-15WIFI 기판 상단부">
-<p>좌상단에 두번째 통신 채널 혹은 디버깅용 포트로 추정되는 홀이 보이네요. </p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06534.jpg" alt="CTR-15WIFI 기판 하단부" title="CTR-15WIFI 기판 하단부">
-<p>역시나 캐패시터가 눈에 띕니다.<br>좌하단엔 온도 측정을 위해 사용되는 것으로 추정되는 서미스터 (thermistor)가 보입니다.</p>
-<h2 id="설치기"><a href="#설치기" class="headerlink" title="설치기"></a>설치기</h2><img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06536.jpg" alt="전원 끄기" title="전원 끄기">
-<p>안전을 위해 절연장갑을 착용하고, 기존에 사용중이던 온도 조절기는 전원버튼을 눌러서 끕니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06540.jpg" alt="온도조절기 탈거" title="온도조절기 탈거">
-<p>온도조절기를 위쪽으로 밀어 백플레이트에서 본체를 탈거합니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06542.jpg" alt="탈거된 온도조절기" title="탈거된 온도조절기">
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06543.jpg" alt="탈거된 온도조절기 - 2" title="탈거된 온도조절기 - 2">
-<p><strong>본체에 표시된 극성을 잘 메모해둡니다.</strong> (근데 저는 메모했는데도 실수했습니다 ㅋㅋㅋ)</p>
-<p>신기하게도 두 온도조절기에 적혀있는 QA 담당자로 추정되는 분의 이름이 똑같습니다 ㅎㅎ</p>
-<p>제 것은 얇은 단심으로 된 전선인데, 많이 꼬아진 상태로 스트레스를 많이 받았는지 살짝 움직이니 끊어져버렸습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06546.jpg" alt="온도 조절기에서 사용하는 두가닥의 전선" title="온도 조절기에서 사용하는 두가닥의 전선">
-<p>나사를 풀어 기존 온도조절기에 고정된 전선을 빼냅니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06551.jpg" alt="기존 백플레이트와의 비교샷" title="기존 백플레이트와의 비교샷">
-<p>새 온도조절기와 기존 온도조절기의 크기가 다르기 때문에 백플레이트도 교체해야합니다.<br>다행히 스크류 홀의 위치는 똑같아서 특별한 이슈 없이 교체할 수 있습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06553.jpg" alt="기존 백플레이트 탈거" title="기존 백플레이트 탈거">
-<p>기존 백플레이트 탈거 후 새로운 백플레이트를 설치합니다.<br>(새 백플레이트 설치 사진은 깜빡하고 안찍었네요.. ㅠㅠ)</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06549.jpg" alt="와이어 스트리퍼로 피복 벗겨내기" title="와이어 스트리퍼로 피복 벗겨내기">
-<p>새 온도조절기와 결선을 하기 전에, 기존 전선의 길이가 애매해서 정리하기로 합니다.<br>일단 여러 전선을 감싸고 있는 첫 피복을 와이어 스트리퍼로 벗겨냅니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06562.jpg" alt="전선 정리" title="전선 정리">
-<p>두가닥 전선의 길이를 니퍼로 깔끔하게 맞춰줍니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06567.jpg" alt="와이어 스트리퍼로 피복 벗겨내기" title="와이어 스트리퍼로 피복 벗겨내기">
-<p>각 전선은 연결을 위해 와이어 스트리퍼로 피복을 다시 벗겨냅니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06557.jpg" alt="접속부 쉽게 꺼내기" title="접속부 쉽게 꺼내기">
-<p>드라이버를 사용하면 쉽게 빠지지 않는 접속부를 쉽게 꺼낼 수 있습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06569.jpg" alt="온도 조절기와 기존 전선 연결" title="온도 조절기와 기존 전선 연결">
-<p>온도 조절기와 기존 전선을 연결합니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06571.jpg" alt="쨔잔" title="쨔잔">
-<p>쨔잔! 연결 즉시 전원이 잘 들어오는걸 확인할 수 있습니다.<br>이 상태에서 전원버튼을 눌러서 잠시 꺼두고 (온도조절기가 실제로 꺼지는 건 아니였습니다..)</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06572.jpg" alt="합체" title="합체">
-<p>백플레이트와 결합합니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06574.jpg" alt="끝" title="끝">
-<p>설치가 잘 되었습니다.</p>
-<p>(이때까지만 해도 연동에서 말썽을 일으킬 줄은 상상도 못했습니다….)</p>
-<h2 id="연동기"><a href="#연동기" class="headerlink" title="연동기"></a>연동기</h2><p>연동을 위한 AP 모드 진입은 쉽습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06583.jpg" alt="AP모드 진입 방법" title="AP모드 진입 방법">
-<p>전원을 끈 상태에서 예약설정/수온설정 버튼을 5초간 누르고 있으면…</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06587.jpg" alt="AP모드 진입중" title="AP모드 진입중">
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06588.jpg" alt="AP모드 진입중 - 2" title="AP모드 진입중 - 2">
-<p>설정을 위한 AP 모드로 진입합니다. 현재 상태에서는 검색은 되나 접속이 되지 않습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06589.jpg" alt="AP모드 활성화" title="AP모드 활성화">
-<p>30초정도 기다리면 AP모드 활성화를 의미하는 파란 안테나 아이콘이 LCD 우상단에 표시됩니다.<br>이 상태에서 앱에서 초기 연동 관련 설정을 진행하면 됩니다.</p>
-<p>물론 호기심이 발동해 바로 연동 관련 설정을 진행하지 않았습니다 (…)</p>
-<h3 id="호기심-발동"><a href="#호기심-발동" class="headerlink" title="호기심 발동"></a>호기심 발동</h3><p>일단 AP 모드에서 어떤 포트가 열려있는지 궁금했습니다.</p>
-<p>설정을 위한 AP Mode라 하더라도 AP Mode는 이름 그대로 Access Point Mode이므로 Wi-Fi 되는 디바이스면 다 붙을수 있지요.<br>맥북으로 붙어봅니다.</p>
-<p>DHCP로 192.168.200.2 ~ 192.168.200.254 대역을 할당해서 쓰네요.<br>게이트웨이는 192.168.200.1 이므로 192.168.200.1 호스트에 대해 스캔을 해보면…</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/well-known-ports.png" alt="스캔 결과" title="스캔 결과">
-<p>80번이 열려있네요. 아마 시스템 관련 설정페이지겠지요.</p>
-<p>curl으로 빠르게 훑어보면…</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/curl.png" alt="80번 포트의 컨텐츠" title="80번 포트의 컨텐츠">
-<p>역시나 디바이스 관련 설정이 있습니다.<br>펌웨어 버전, MAC Address, 디바이스 재부팅 버튼, 펌웨어 업데이트 버튼이 보이네요.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/admin.png" alt="어드민 페이지" title="어드민 페이지">
-<p>브라우저에서 보면 이렇습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/curl-head.png" alt="lwIP로 구현된 웹서버" title="lwIP로 구현된 웹서버">
-<p>lwIP를 서버로 쓰고 있네요. <strong>lwIP는 BSD 라이선스인데 별도로 저작권자 표기를 발견하지는 못했습니다.</strong><br>아쉬운 부분입니다.</p>
-<p>더 볼 것이 없어서 스킵을 하려고 하는데….</p>
-<h2 id="문제-발생"><a href="#문제-발생" class="headerlink" title="문제 발생"></a>문제 발생</h2><img src="/2016/11/06/installing-kiturami-iot-heating-controller/ping.png" alt="다운" title="다운">
-<p>호스트, 그러니까 온도 조절기가 먹통이 되는 사태가 발생했습니다. 다량의 패킷을 쏴서 그런지 먹통이 된 것 같네요.</p>
-<p>전원버튼을 눌러서 전원을 끄고 다시 AP 모드에 진입을 수십번 반복했지만, 파란색 안테나 아이콘이 뜨지 않습니다.<br>AP 모드 진입 후 파란색 안테나 아이콘이 뜨기까지 십분 이상 기다렸는데도 활성화가 되지 않습니다 -_-;;</p>
-<p>아무리 생각해봐도 기기에 붙어있는 ‘전원 버튼’ 은 실제로 온도 제어기의 전원을 제어하는 것은 아닌 것 같아서,<br>리셋 버튼이나 리셋 핀을 찾아보았습니다만 그 어디에도 없었습니다.</p>
-<p>이 상황에서 확실히 온도 제어기를 껐다가 다시 켜는 방법은 연결된 보일러를 끄는 것이라 유일하다고 판단을 했는데…<br>장식장 뒤편에 보일러실이 있어서 보일러 전원 코드를 뽑을수도 없는 상황이었습니다.</p>
-<p>백플레이트 뜯어내서 연결된 전선을 끊고 다시 연결할까 생각해봤지만…<br>귀찮아서 결국 보일러랑 연결된 차단기를 찾아서 차단기를 내렸다가 다시 올렸습니다.</p>
-<p>그랬더니 예상대로 AP모드가 잘 활성화가 되었습니다. </p>
-<p>근데 이번에는 아이폰에서 공유기 연결을 위한 초기 설정이 안됩니다.<br>iPhone 6 Plus / iOS 10.0.2 를 사용하고 있는데, 아이폰에서 AP모드를 붙고 나서 설정을 시도하면 또 먹통이 됩니다… -_-;;;;</p>
-<p>차단기 내리고 다시 설정… 을 몇번 반복하다가 그냥 노는 안드로이드 단말 찾아서 설정하니 한방에 붙네요.</p>
-<p>허탈했습니다….</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06591.jpg" alt="정상적으로 붙은 상태" title="정상적으로 붙은 상태">
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06592.jpg" alt="정상적으로 붙은 상태" title="정상적으로 붙은 상태">
-<p>공유기에 정상적으로 붙으면 이렇게 PASS 텍스트가 찍힙니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06593.jpg" alt="연동 완료" title="연동 완료">
-<p>회원가입후 기기 등록까지 완료되면 최종적으로 이런 화면이 표시됩니다.</p>
-<h2 id="패킷-훔쳐보기"><a href="#패킷-훔쳐보기" class="headerlink" title="패킷 훔쳐보기"></a>패킷 훔쳐보기</h2><p>개인적으로 insecure/suspicious 하다고 판단되는 장비들은 별도의 Bridged AP로 고립시키고,<br>필요시 tcpdump를 통해 언제든지 패킷스니핑이 가능하도록 내부망을 운용하고 있습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/infra.png" alt="Internal wireless infrastructure" title="Internal wireless infrastructure">
-<p>대강 요런 모습입니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/DSC06576.jpg" alt="산딸기" title="산딸기">
-<p>저렇게 Raspberry pi (무려 1세대 Model B 모델!)에 iptime N300UA를 붙여서 Soft AP를 만든것이죠.</p>
-<p>App에서 오고 가는 HTTP/HTTPS 패킷들은 주로 Charles Proxy를 통해 쉽고 간편하게 훔쳐볼 수 있고,<br>breakpoint를 걸어 request/response를 마음대로 제어할 수 있기 때문에 앱에서 사용하는 HTTP/HTTPS<br>기반 API를 뜯어보기에 좋습니다.</p>
-<p>AP 모드에서 초기 연동 설정을 하기 이전에<br>tcpdump over ssh + wireshark 조합으로 온도 조절기에서 오고 가는 패킷들을 캡쳐하고,<br>Chalres Proxy를 통해 App에서 오고 가는 패킷들을 캡쳐하도록 설정했습니다.</p>
-<h3 id="온도-제어기-서버간-패킷-훔쳐보기"><a href="#온도-제어기-서버간-패킷-훔쳐보기" class="headerlink" title="온도 제어기 - 서버간 패킷 훔쳐보기"></a>온도 제어기 - 서버간 패킷 훔쳐보기</h3><img src="/2016/11/06/installing-kiturami-iot-heating-controller/packet-1.png" alt="초기 연결 이후 패킷 흐름" title="초기 연결 이후 패킷 흐름">
-<p>(공유기 연결 이전에 캡쳐를 시작했기 때문에, DHCP로 IP를 받아오고, ARP 응답을 하는 것이 보입니다.)</p>
-<p>초기 공유기와 연결이 되면, TCP를 통해 서버에 기기 등록 관련 메세지를 즉시 보냅니다. 재미있는 점은, 별도로 DNS 질의를 하지 않는다는 것입니다.<br>즉, 도메인이 아닌 IP가 펌웨어에 하드코딩 되어 있습니다. 물론 IP가 변경될 일은 없겠지만요.<br>Round-robin DNS로 load balancing을 할 수도 있을거란 생각을 해보지만, 사용자가 소규모라 따로 분산처리가 필요치 않다고 판단했겠지요. (Xiaomi의 경우에는 Round robin DNS를 위해 A 레코드에 18개 호스트가 등록되어 있습니다)</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/packet-2.png" alt="TCP 데이터 패킷 흐름" title="TCP 데이터 패킷 흐름">
-<p>온도 제어기와 서버간 TCP 패킷은 암호화 되어있지 않습니다.</p>
-<p>(다시 Xiaomi와 비교해보자면, Xiaomi는 Message Header는 암호화 되어 있지 않지만, message body는 AES-128-CBC로 암호화되어 오고갑니다.)</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/packet-3.png" alt="인터넷 상태 확인을 위한 DNS Query" title="인터넷 상태 확인을 위한 DNS Query">
-<p>또 재미있는것은, <strong>인터넷 연결 상태를 확인하기 위해 2분마다 google.com 의 A 레코드를 조회하는 DNS Query를 보낸다</strong>는 것입니다.</p>
-<p>어쩄거나 패킷이 암호화 되어 있지 않은 상태이기 때문에, 패킷의 구조나 명령 종류에 대해서는 패킷을 분석해보면 쉽게 알아낼 수 있을것입니다.</p>
-<p><strong>다르게 생각해보자면, 내부망에 침입이 가능한 경우 API를 통해서가 아니라 직접 디바이스로 명령 패킷을 보낼 수도 있다는 것이겠지요 :)</strong></p>
-<p>패킷 수준의 분석은 일단 충분한 정보를 얻었다고 판단해 여기까지 진행하고, HTTP(S) API를 살펴보기로 합니다.</p>
-<h3 id="애플리케이션-서버간-HTTP-S-요청-응답-훔쳐보기"><a href="#애플리케이션-서버간-HTTP-S-요청-응답-훔쳐보기" class="headerlink" title="애플리케이션 - 서버간 HTTP(S) 요청/응답 훔쳐보기"></a>애플리케이션 - 서버간 HTTP(S) 요청/응답 훔쳐보기</h3><p>애플리케이션 - 서버간 사용하는 API는 크게 두가지로 나뉩니다.</p>
-<p>첫번째는, iOS App과 구버전 Android App에서 사용하는 HTTP API<br>두번째는, 업데이트된 최신 Android App에서 사용하는 HTTPS API<br>가 있습니다.</p>
-<h4 id="업데이트된-안드로이드-앱-HTTPS-API-뜯어보기"><a href="#업데이트된-안드로이드-앱-HTTPS-API-뜯어보기" class="headerlink" title="업데이트된 안드로이드 앱 - HTTPS API 뜯어보기"></a>업데이트된 안드로이드 앱 - HTTPS API 뜯어보기</h4><p>위에서 초기 연동에 문제가 있어서 안드로이드 앱을 사용했기 때문에,<br>안드로이드에서 사용하는 <em>업데이트된</em> HTTPS API를 살펴보겠습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/https-1.png" alt="HTTPS Request Overview" title="HTTPS Request Overview">
-<p>Charles Proxy로 가로챈 Request입니다. HTTPS Protocol을 확인할 수 있습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/poodle.png" alt="SSLv3 protocol 사용 가능" title="SSLv3 protocol 사용 가능">
-<p>HTTP에서 HTTPS로 변경은 되었으나, POODLE Attack 위험이 있는 SSLv3을 지원하고 있습니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/missing-hsts.png" alt="Missing HSTS Header" title="Missing HSTS Header">
-<p>또한, HSTS 헤더가 존재하지 않기 때문에 별도의 루트 인증서 설치 없이도 SSL MITM이 쉽게 가능합니다.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/https-2.png" alt="여전히 존재하는 일부 HTTP API" title="여전히 존재하는 일부 HTTP API">
-<p>회원가입에서 사용하는 주소검색 API는 여전히 HTTP를 사용합니다.<br>이와 별개로, 우편번호 검색 API에서 질의가 exact match이기 때문에 질의에 공백이 들어가면 검색 결과가 나타나지 않고,<br>건물명이 포함된 우편번호를 검색하는 경우, 일부만 입력하면 검색결과가 나타나지 않아 불편합니다.</p>
-<blockquote>
-<p>예: <code>귀뚜라미빌딩</code> 으로 등록된 우편번호 검색시 <code>귀뚜라미</code> 만 입력하는 경우 검색 불가</p>
-</blockquote>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/https-3.png" alt="아이디와 비밀번호가 세번 날아간다!" title="아이디와 비밀번호가 세번 날아간다!">
-<p>좀 아쉬운건, 아이디/비밀번호를 보내는 의미를 알 수 없는 분리된 API 3개가 존재한다는 것입니다.</p>
-<p>위 이미지는 회원가입 이후 로그인시 날아가는 요청들인데, 각 역할은 다음과 같습니다. </p>
-<ol>
-<li>회원가입 요청 / 단순 성공여부 응답</li>
-<li>API Access Key 생성 / 생성된 API Key 응답: UUID 형태이고, <strong>본 Access Key는 첫 발급시 Cookie처럼 동작합니다 (!!!)</strong></li>
-<li>로그인 요청 (2. 에서 얻은 Token을 HTTP Header로 실어서 인증 성공시 해당 Access Token에 권한 부여, 이후에는 Access Key 발급 없고 Login API의 Response body의 JSON payload내 key field로 제공됨)</li>
-</ol>
-<p>개인적으로는 1~3을 굳이 분리할 필요가 있나 생각이 듭니다. 단일 API로 통일해도 충분했을 것 같은데 말이죠 :)<br>인증 매커니즘은 많이 아쉬운 부분입니다. 이건 그냥 Cookie 대신 Custom HTTP Header를 통해 세션키를 쓰겠다는 것과 다름없어 보이는데요.</p>
-<img src="/2016/11/06/installing-kiturami-iot-heating-controller/https-4.png" alt="명령 패킷" title="명령 패킷">
-<p>디바이스로 보낼 명령은 단일 API를 사용하는 것 같습니다.<br>실내온도 21도로 설정했을때의 요청입니다.</p>
-<p>JSON payload 내 <code>message</code> field에 직접 Packet payload (in hex string) 를 실어 보내네요.<br>어디서 본 것 같다고 생각했는데 바로 위 TCP Packet Payload에서 봤던 그것이었습니다.</p>
-<p>HTTPS 요청과 응답 역시 시간을 들여 분석해보면 더 자세한 것을 알 수 있을것입니다.<br>그래도 HTTP 대비 나아진 부분이 보이네요. 더이상 Response payload에 password가 포함되어 있지 않습니다.</p>
-<h4 id="iOS-앱-HTTP-API-뜯어보기"><a href="#iOS-앱-HTTP-API-뜯어보기" class="headerlink" title="iOS 앱 - HTTP API 뜯어보기"></a>iOS 앱 - HTTP API 뜯어보기</h4><p>iOS 앱에서 사용하는 HTTP API를 위와 같은 방법으로 살펴보았으나, </p>
-<ol>
-<li>도메인이 아닌 특정 IP로 접속을 요청하는 점</li>
-<li>API Protocol이 HTTPS가 아닌 HTTP인 점</li>
-</ol>
-<p>이외에는 큰 차이가 없어 자세히 기술하지는 않습니다.</p>
-<h2 id="다음-할일"><a href="#다음-할일" class="headerlink" title="다음 할일"></a>다음 할일</h2><p>어느정도 내부를 뜯어보았으니, 이 다음은 Homebridge plugin을 만들어 Homekit에 붙여볼 차례입니다.</p>
-<p>이 부분은 진행인 작업이고, 완료되면 별도 포스트로 찾아뵙도록 하겠습니다!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;귀뚜라미보일러-IoT-온도-조절기&quot;&gt;&lt;a href=&quot;#귀뚜라미보일러-IoT-온도-조절기&quot; class=&quot;headerlink&quot; title=&quot;귀뚜라미보일러 IoT 온도 조절기&quot;&gt;&lt;/a&gt;귀뚜라미보일러 IoT 온도 조절기&lt;/h1&gt;&lt;p&gt;작년즈음 귀
-    
-    </summary>
-    
-      <category term="gadget" scheme="https://mooyoul.github.io/categories/gadget/"/>
-    
-    
-      <category term="iot, thermometer, kiturami, research, network" scheme="https://mooyoul.github.io/tags/iot-thermometer-kiturami-research-network/"/>
-    
-  </entry>
+<nav id="article-nav" class="article-nav">
   
-  <entry>
-    <title>집의 조명 시스템을 Hue로 전환하다 - 1편</title>
-    <link href="https://mooyoul.github.io/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/"/>
-    <id>https://mooyoul.github.io/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/</id>
-    <published>2016-09-04T22:59:14.000Z</published>
-    <updated>2016-09-09T22:17:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Philips-Hue"><a href="#Philips-Hue" class="headerlink" title="Philips Hue"></a>Philips Hue</h4><p>Philips Hue는 <strong>Personal wireless lighting</strong>, 개인 무선 조명을 슬로건으로 가지는 Philips의 조명 제품군입니다.<br>일반적인 LED 조명들과 동일하게 저전력 고효율의 성능을 가지고 있고, 밝기를 조정하는 디밍 (Dimming)이 가능할 뿐만 아니라 원하는 색상을 색상 피커 (Color picker)에서 찍어 표현할 수도 있습니다.<br>무엇보다 전구별로 각각 다른 색과 밝기를 조합해 장면 (Scene)을 만들어내 특유의 무드를 연출하기 좋죠.</p>
-<p>램프들은 지그비(Zigbee)라는 2.4Ghz대역을 사용하는 무선 통신을 통해 브릿지와 연결되고, 앱과 Siri를 통해 제어가 가능합니다.<br>Zigbee를 사용하기 때문에 Bluetooth로 페어링되는 다른 조명들과 달리 커버리지가 훨씬 넓고 복수의 조명을 동시 제어(그룹 제어)할 수 있으며, 집 밖에서도 제어가 가능합니다.<br><a href="http://www.developers.meethue.com/" target="_blank" rel="external">공개 API</a>가 있어 서드파티 애플리케이션을 만들수도 있고요.</p>
-<p>자세한 내용은 아래 링크와 비디오를 참고해보세요.</p>
-<div class="video-container"><iframe src="//www.youtube.com/embed/lCv4r3wgsPQ" frameborder="0" allowfullscreen></iframe></div>
-<div class="video-container"><iframe src="//www.youtube.com/embed/griC5Tu0R2A" frameborder="0" allowfullscreen></iframe></div>
-<ul>
-<li><a href="http://www2.meethue.com/en-us/" target="_blank" rel="external">Hue 공식 소개 페이지 - Meet Hue (영문/미국)</a></li>
-<li><a href="http://www2.meethue.com/ko-kr/" target="_blank" rel="external">Hue 공식 소개 페이지 - Meet Hue (한글/대한민국)</a> - <em>일부 제품군이 제외되어 있습니다</em></li>
-</ul>
-<h4 id="지르고보자"><a href="#지르고보자" class="headerlink" title="지르고보자"></a>지르고보자</h4><p>올해 7월, <a href="http://slickdeals.net/f/8918479-philips-hue-led-white-and-color-ambiance-starter-kit-multicolor-125-free-shipping" target="_blank" rel="external">Slickdeals를 둘러보던 중 Bestbuy via eBay에서 2세대 Hue white and color ambiance starter kit을 $119에 판매한다는 쓰레드</a>를 보자마자 싸다는 이유로 무작정 스타터 킷을 주문했습니다.<br><img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/starter-kit-order-details.png" alt="싸..싸다!" title="싸..싸다!"></p>
-<p>1세대도 아닌 2세대 스타터킷이 $199에 주로 판매되는걸 생각한다면 엄청난 딜이었죠.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/must-buy.jpg" alt="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:attachment/1000685049.jpg" title="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:attachment/1000685049.jpg"> 
-<p>이미 1세대 스타터킷을 구매해 사용하고 있었지만 2세대는 아래와 같은 변경사항이 있어서 더더욱 유혹을 뿌리칠 수 없었습니다.<br>그래서 일단 질렀습니다.</p>
-<h5 id="2세대-Hue는-무엇이-바뀌었나"><a href="#2세대-Hue는-무엇이-바뀌었나" class="headerlink" title="2세대 Hue는 무엇이 바뀌었나?"></a>2세대 Hue는 무엇이 바뀌었나?</h5><p>2세대 Hue 제품군은 크게 다음과 같은 변화가 있었습니다:</p>
-<blockquote>
-<p>2세대 브릿지는 Apple의 Homekit을 지원 (Homekit 인증을 위해 하드웨어 일부 변경), 이 덕에 Siri를 통해 음성 제어가 가능<br>2세대 White and color ambiance bulb는 밝기가 1세대에 비해 더 밝아짐<br>Lightstrip은 Lightstrip Plus라는 이름으로 변경되고 밝기가 밝아졌으며, 여러개의 스트립을 연결하여 길이 연장이 가능<br>거치형인 Iris가 단종되고 이를 대체하는 Bloom 출시. Iris 대비 크기가 작아짐<br>이동 거치가 가능한 충전식 조명 Hue Go 출시<br>Hue White 및 White ambiance bulb 출시</p>
-</blockquote>
-<h5 id="미국에서-구매한-Hue-한국에서-사용할-수-있을까"><a href="#미국에서-구매한-Hue-한국에서-사용할-수-있을까" class="headerlink" title="미국에서 구매한 Hue, 한국에서 사용할 수 있을까?"></a>미국에서 구매한 Hue, 한국에서 사용할 수 있을까?</h5><p>막상 지르고 나서 정신을 차려보니 전압이 호환되는지 확인을 안해봐서 걱정이 되었습니다.<br>싸다고 일단 질렀는데, 전압이 안맞으면 낭패니까요…</p>
-<p>브릿지부터 찾아봅니다. 1세대처럼 DC 어댑터를 쓸테고, 요즘에 나오는 DC 어댑터들은 대개 프리볼트지만…<br>혹시 모르니까 <a href="http://www2.meethue.com/en-us/productdetail/philips-hue-bridge" target="_blank" rel="external">미국 Hue 홈페이지의 Hue Bridge 페이지</a>에서 찾아봅니다.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/bridge-spec.png" alt="Specifications of Hue Bridge" title="Specifications of Hue Bridge">
-<p>오, 역시 프리볼트를 지원합니다!<br>게다가 5V 2A 입력이라 PoE Splitter를 통해 전원을 공급해도 되고,<br>어댑터 잭(꼬다리)를 잘라내 USB로 개조한다면 멀티포트 USB 충전기에 꽂아 콘센트 공간을 줄일수도 있습니다.</p>
-<p>다음, <a href="http://www2.meethue.com/en-us/productdetail/philips-hue-white-and-color-ambiance---extension-bulbs" target="_blank" rel="external">White and color ambiance bulb</a>을 봅니다.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/bulb-spec.png" alt="Specifications of Hue White and color ambiance bulb (2nd gen)" title="Specifications of Hue White and color ambiance bulb (2nd gen)">
-<p>으..음…?!?!?!?!???!?!?!!!<br>아닐거야.. 부정하며 아마존의 Product Q&amp;A를 찾아봅니다…</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/amazon-qna.png" alt="No. Only 120v..." title="No. Only 120v...">
-<p>오.. 마이… 갓….  </p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/goja.gif" alt="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:%EA%B3%A0%EC%9E%90%EB%9D%BC%EB%8B%88.gif" title="출처: https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:%EA%B3%A0%EC%9E%90%EB%9D%BC%EB%8B%88.gif">
-<p>사실을 받아들이기 싫어서… 어떻게 정확한 정보를 알 수 없을까? 고민하다가<br>미국에 판매되는 전기제품들은 FCC 인증을 받는다는 것을 떠올리고 FCC ID로 데이터를 찾아봅니다.<br>그리고… <a href="https://apps.fcc.gov/oetcf/eas/reports/ViewExhibitReport.cfm?mode=Sum&amp;calledFromFrame=N&amp;RequestTimeout=500&amp;application_id=KCWgrlBX4C%2F7LuE4veHPag%3D%3D&amp;fcc_id=O3M9290011419X" target="_blank" rel="external">발견한 정확한 FCC 인증정보</a>! 넘나 다행인것…</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/fcc-bulb.png" alt="FCC Exhibit Report of O3M9290011419X - Hue White and color ambiance bulb (2nd gen)" title="FCC Exhibit Report of O3M9290011419X - Hue White and color ambiance bulb (2nd gen)">
-<p>저기 보이세요? ACDC board 120V230V!!!!<br>어깨너머 하드웨어를 배운 저는 저게 <em>(특수문자가 짤려서)</em> <strong>AC/DC board 120V~230V</strong>. 교류 120v~230v 입력을 받는 AC to DC 회로, 그러니까 프리볼트를 의미한다는것을 곧바로 알아챘습니다.<br>그리고 뒤늦게 <a href="https://www.quora.com/Will-Philips-Hue-work-with-220v" target="_blank" rel="external">Quora에 올라온 Will Philips Hue work with 220v?</a>도 발견했죠…</p>
-<p>요악하자면, <strong>Hue White ambiance bulb/Hue White bulb를 제외한 대부분의 제품군들은 220v에서도 사용이 가능</strong>합니다.</p>
-<p>지금 이 포스트를 쓰고 있는 시점에도 Hue Bridge (2nd gen), Hue Lightstrip Plus, Hue White and color ambiance bulb (2nd gen), Hue Iris를 돼지코만 끼워서 잘 사용하고 있습니다.</p>
-<h4 id="2세대-스타터킷-수령-및-설치"><a href="#2세대-스타터킷-수령-및-설치" class="headerlink" title="2세대 스타터킷 수령 및 설치"></a>2세대 스타터킷 수령 및 설치</h4><p>2세대 스타터킷을 수령해 기존 1세대 브릿지와 램프를 교체하고 나니 집의 조명 시스템을 모두 Hue로 변경하면 좋겠단 생각이 들었습니다.<br><del>인간의 욕심은 끝이 없다 (…)</del></p>
-<h4 id="첫번째-추가-램프-구입-Lightstrip-Plus-Iris"><a href="#첫번째-추가-램프-구입-Lightstrip-Plus-Iris" class="headerlink" title="첫번째 추가 램프 구입 - Lightstrip Plus, Iris"></a>첫번째 추가 램프 구입 - Lightstrip Plus, Iris</h4><img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/iris-order-details.png" alt="Lightstip Plus / Iris order details" title="Lightstip Plus / Iris order details">
-<p><del>기프트카드 털어내기</del></p>
-<p>첫번째로 추가 구매한 램프는 Hue Lightstrip Plus와 Hue Iris입니다.<br>Hue Iris는 벽을 향해 조명을 쏴서 간접 조명으로 사용하고, Lightstrip Plus 또한 천장에 설치된 천장등의 외곽을 따라 간접 조명으로 사용해보고 싶었습니다.<br>무엇보다 천장등에 설치된 FL 형광등 전체를 Lightstrip Plus를 조각내 만든 LED Bar로 교체하기 위해서는 사전 테스트가 필요하기도 했고요.</p>
-<p>그리고 수령샷.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/IMG_2811.jpg" alt="Package of Hue Lightstrip Plus / Hue Iris" title="Package of Hue Lightstrip Plus / Hue Iris">
-<p>Lightstrip Plus를 열어보면 이렇게 생겼습니다.</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/20160903_010727.jpg" alt="Package of Hue Lightstrip Plus" title="Package of Hue Lightstrip Plus">
-<p>Iris는 허겁지겁 박스를 뜯고 테스트를 하느라 따로 개봉샷을 찍어둔게 없어 실 사용샷으로 대체합니다.<br>설치는 그냥 콘센트에 꽂고 앱에서 초기 페어링만하는게 전부라 따로 설명할 내용이 없네요;;</p>
-<img src="/2016/09/05/Migrating-home-lighting-system-to-Philips-Hue/20160907_051539.jpg" alt="Hue Iris was installed behind TV" title="Hue Iris was installed behind TV">
-<h4 id="Lightstrip-Plus를-천장-간접조명으로-설치"><a href="#Lightstrip-Plus를-천장-간접조명으로-설치" class="headerlink" title="Lightstrip Plus를 천장 간접조명으로 설치"></a>Lightstrip Plus를 천장 간접조명으로 설치</h4><p>기존 거실등은 2개의 전원이 내려오고, 각 전원은 2개의 EL 램프가 연결되어 총 4개의 램프로 구성되어 있었습니다.</p>
-<p>이 중, 한 전원에 연결된</p>
-<p>기본적으로 미국에서 구입한 Hue Lightstrip은 11자 110v US 플러그를 사용하기 때문에  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Philips-Hue&quot;&gt;&lt;a href=&quot;#Philips-Hue&quot; class=&quot;headerlink&quot; title=&quot;Philips Hue&quot;&gt;&lt;/a&gt;Philips Hue&lt;/h4&gt;&lt;p&gt;Philips Hue는 &lt;strong&gt;Personal wire
-    
-    </summary>
-    
-      <category term="gadget" scheme="https://mooyoul.github.io/categories/gadget/"/>
-    
-    
-      <category term="draft, iot, hue, diy" scheme="https://mooyoul.github.io/tags/draft-iot-hue-diy/"/>
-    
-  </entry>
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
   
-</feed>
+  
+    <a href="/2016/11/06/installing-kiturami-iot-heating-controller/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">귀뚜라미보일러 IoT 컨트롤러 설치기 및 뜯어보기</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>init 1 - MooYeol Prescott Lee</p>
+
+
+      </div>
+    </footer>
+
+      
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83917556-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+    </div>
+  </body>
+</html>
