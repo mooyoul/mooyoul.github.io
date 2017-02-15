@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mooyoul.github.io/"/>
-  <updated>2017-02-15T20:49:05.000Z</updated>
+  <updated>2017-02-15T20:58:47.000Z</updated>
   <id>https://mooyoul.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://mooyoul.github.io/2017/02/16/Setting-Timezone-on-AWS-Lambda/"/>
     <id>https://mooyoul.github.io/2017/02/16/Setting-Timezone-on-AWS-Lambda/</id>
     <published>2017-02-15T19:31:39.000Z</published>
-    <updated>2017-02-15T20:49:05.000Z</updated>
+    <updated>2017-02-15T20:58:47.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="AWS-Lambda에서의-Timezone-설정"><a href="#AWS-Lambda에서의-Timezone-설정" class="headerlink" title="AWS Lambda에서의 Timezone 설정"></a>AWS Lambda에서의 Timezone 설정</h1><blockquote>
 <p>TL;DR <strong><code>TZ</code> 환경 변수(Environment Variable) 통해서 Timezone을 설정할 수 있어요</strong></p>
@@ -31,7 +31,7 @@
 <p>예~전에 RDS에서도 기본 Timezone이 UTC로 설정되어 있어서 동일한 이슈를 이미 겪어봤기에 바로 타임존 문제임을 알아챌 수 있었다.</p>
 <p>그런데 RDS의 경우 Parameter group에서 Timezone 설정만 변경해주면 되는데,<br>AWS Lambda의 경우 코드만 올리고 땡이라 <strong>그런거 없다.</strong></p>
 <p>그리고 일반적으로 리눅스 박스에서 Timezone을 변경하려면 <code>/etc/localtime</code> 혹은  <code>/etc/timezone</code>을 수정하는 방법을 썼는데,<br>AWS Lambda는 코드만 돌아가는 서비스라 그걸 변경하기도 불가능하다. 애초에 Root access가 막혀있어서 파일을 수정할 수 없다.</p>
-<img src="/2017/02/16/Setting-Timezone-on-AWS-Lambda/lambda-after-set-tz.png" alt="Timezone 설정하기 전 UTC로 포매팅되는 모습" title="Timezone 설정하기 전 UTC로 포매팅되는 모습">
+<img src="/2017/02/16/Setting-Timezone-on-AWS-Lambda/lambda-after-set-tz.png" alt="Timezone을 Asia/Seoul로 설정한 후 포매팅되는 모습" title="Timezone을 Asia/Seoul로 설정한 후 포매팅되는 모습">
 <p>정말 다행히 Lambda에서 환경 변수를 지원해서, <code>TZ</code> 환경 변수를 <code>Asia/Seoul</code>로 설정해봤더니.<br>너무 잘 된다. POSIX 짱짱맨!!!!</p>
 <blockquote>
 <p>Node.js 런타임 내에서 <code>TZ</code> 환경변수를 설정할 경우 (e.g. <code>process.env.TZ = &#39;Asia/Seoul&#39;;</code>),<br>어떠한 Date 함수를 호출하기 전에 반드시 먼저 <code>TZ</code> 환경변수를 설정해야한다.<br>그렇지 않는다면 Timezone 설정이 적용되지 않는다.</p>
