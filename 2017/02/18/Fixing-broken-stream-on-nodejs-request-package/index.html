@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Node.js request 패키지의 망가진 Stream 고치기 | init 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Node.js request 패키지의 망가진 Stream 고치기얼마 전 사이드잡으로 진행하고 있는 서비스에서 소셜 계정으로 로그인한 아바타 이미지(프로필 사진)가 표시되지 않는 일이 발생했다.
+그동안 해당 서비스에서는 아바타 이미지를 스토리지에 저장하지 않고 각 SNS 서비스에서 제공하는 아바타 이미지의 URL을 가져다가 썼는데,Facebook을 비롯한">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js request 패키지의 망가진 Stream 고치기">
+<meta property="og:url" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/index.html">
+<meta property="og:site_name" content="init 1">
+<meta property="og:description" content="Node.js request 패키지의 망가진 Stream 고치기얼마 전 사이드잡으로 진행하고 있는 서비스에서 소셜 계정으로 로그인한 아바타 이미지(프로필 사진)가 표시되지 않는 일이 발생했다.
+그동안 해당 서비스에서는 아바타 이미지를 스토리지에 저장하지 않고 각 SNS 서비스에서 제공하는 아바타 이미지의 URL을 가져다가 썼는데,Facebook을 비롯한">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/first-upload.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/zero-bytes.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/second-upload.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/such-bytes.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/aws-sdk-s3-upload-doc.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/file-stream-upload.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/http-request-upload.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/write-to-local-file.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/write-to-local-file-delayed.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/write-to-local-file-delayed-http.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request-response-stream-state.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/upload-after-fixed.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/buffer-vs-stream.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/stream-all-the-things.jpg">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/mikeal.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request-v3-branch.png">
+<meta property="og:updated_time" content="2017-02-19T22:42:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js request 패키지의 망가진 Stream 고치기">
+<meta name="twitter:description" content="Node.js request 패키지의 망가진 Stream 고치기얼마 전 사이드잡으로 진행하고 있는 서비스에서 소셜 계정으로 로그인한 아바타 이미지(프로필 사진)가 표시되지 않는 일이 발생했다.
+그동안 해당 서비스에서는 아바타 이미지를 스토리지에 저장하지 않고 각 SNS 서비스에서 제공하는 아바타 이미지의 URL을 가져다가 썼는데,Facebook을 비롯한">
+<meta name="twitter:image" content="https://mooyoul.github.io/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request.png">
+  
+    <link rel="alternate" href="/atom.xml" title="init 1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+</head>
+
+  
+    <body>
+  
+      <div id="container" class="container">
+        <article id="post-Fixing-broken-stream-on-nodejs-request-package" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+  <nav id="main-nav" class="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/atom.xml">RSS</a>
+    
+      <a class="main-nav-link" href="https://github.com/mooyoul">Github</a>
+    
+      <a class="main-nav-link" href="https://www.linkedin.com/in/mooyoul">LinkedIn</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js request 패키지의 망가진 Stream 고치기
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request.png" alt="request" title="request">
+<h1 id="Node-js-request-패키지의-망가진-Stream-고치기"><a href="#Node-js-request-패키지의-망가진-Stream-고치기" class="headerlink" title="Node.js request 패키지의 망가진 Stream 고치기"></a>Node.js request 패키지의 망가진 Stream 고치기</h1><p>얼마 전 사이드잡으로 진행하고 있는 서비스에서 소셜 계정으로 로그인한 아바타 이미지(프로필 사진)가 표시되지 않는 일이 발생했다.</p>
+<p>그동안 해당 서비스에서는 아바타 이미지를 스토리지에 저장하지 않고 각 SNS 서비스에서 제공하는 아바타 이미지의 URL을 가져다가 썼는데,<br>Facebook을 비롯한 일부 서비스의 경우 해당 이미지 URL에 access control을 위한 policy가 붙어있었다.</p>
+<p>AWS의 CloudFront나 Akamai 같은 CDN의 경우 언제까지 파일에 접근이 가능한지를 Policy를 통해 제어할 수 있는데,<br>아바타 이미지의 URL에 그것이 붙어있었던 것.</p>
+<p>Graph API로 대체를 할까 고민하다가, <a href="http://stackoverflow.com/questions/30477877/facebook-image-url-gets-expired" target="_blank" rel="external">이런 의견</a>도 있고 해서 그냥 로그인할때마다 S3에 올리고 (있으면 덮어쓰고) CloudFront를 통해 서빙을 하는 방향으로 결정하고,<br>아바타 이미지 URL을 내려받고 S3에 해당 이미지를 저장하도록 아래와 같은 스니펫을 작성했다.</p>
+<script src="https://gist.github.com/mooyoul/0296599f7a25683251ae68eec2ee1444.js"></script>
+
+<p>뭐 별 문제 없으리라 생각했다.</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/first-upload.png" alt="네이버 favicon으로 테스트" title="네이버 favicon으로 테스트">
+<p>업로드도 잘 된 것 같았다.</p>
+<p>그런데……. 막상 S3에서 확인해보니….</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/zero-bytes.png" alt="?!?!?!!?" title="?!?!?!!?">
+<p>읭??????? <strong>업로드 한 객체의 크기가 0바이트로 뜬다?!?!?!?</strong></p>
+<p>혹시나해서 <code>s3.upload</code>에 전달하는 <code>Body</code> property를 Readable Stream 대신 Buffer로 던져보기로 했다.</p>
+<script src="https://gist.github.com/mooyoul/3d4d0e9740cb0195b0483e1be5225c52.js"></script>
+
+<p>위 스니펫을 작성하고 다시 동일하게 테스트를 진행했다.</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/second-upload.png" alt="Buffer로 다시 업로드 시도" title="Buffer로 다시 업로드 시도">
+<p>업로드는 잘 되었다고 떴고, 다시 업로드된 객체를 조회해보면…</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/such-bytes.png" alt="오예" title="오예">
+<p>S3에 제대로 파일이 올라간다!!!</p>
+<p>여기서 Buffer를 쓰는 방법을 택하고 포기할 수 있었지만,<br>만약 업로드 할 바이너리가 큰 경우, 동시에 들어오는 로그인 요청이 많아지는 경우를 생각하면 찝찝해서 더 파보기로 했다.<br>메모리는 소중하니까… ㅠㅠ</p>
+<h2 id="어디서-잘못된건지-찾기"><a href="#어디서-잘못된건지-찾기" class="headerlink" title="어디서 잘못된건지 찾기"></a>어디서 잘못된건지 찾기</h2><p>이제 어디서 잘못된건지 검증해야하는 포인트가 조금 좁혀졌다.</p>
+<p>1) AWS SDK에서 <code>s3.upload</code>를 통해 파일을 업로드 할 때, Stream을 사용할 수 없거나<br>2) AWS SDK로 전달되는 Stream에 문제가 있거나</p>
+<p>둘 중 하나일 것이다.</p>
+<h3 id="AWS-SDK"><a href="#AWS-SDK" class="headerlink" title="AWS SDK"></a>AWS SDK</h3><p>AWS SDK에서 <code>s3.upload</code>를 통해 파일을 업로드할 때, Stream을 사용할 수 없는지 검증해야 했다.<br>근데 애초에 내가 Stream을 썼던 것은, <a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#upload-property" target="_blank" rel="external">AWS SDK documentation에서 Stream을 전달할 수 있다</a>고 나왔기 때문이다.</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/aws-sdk-s3-upload-doc.png" alt="심지어 예제도 Stream을 쓰는데?" title="심지어 예제도 Stream을 쓰는데?">
+<p>다시 한번 SDK 문서를 체크해봐도 Readable Stream을 쓸 수 있다고 나와있다. 심지어 예제도 Readable Stream을 쓴다.</p>
+<p>정말 혹~~시라도 문서가 잘못되어있는 경우를 생각하기 위해, AWS SDK에서 Stream을 받을 수 있는지 없는지 검증해보기로 했다.<br>동시에 2)를 검증할 수도 있기도 하고…</p>
+<h3 id="request의-response"><a href="#request의-response" class="headerlink" title="request의 response"></a>request의 <code>response</code></h3><p>request 쪽에서 <code>response</code> event로 전달받은 <code>response</code> readable stream에 문제가 있는지 검증을 하기 위해,<br><a href="https://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options" target="_blank" rel="external"><code>fs.createReadStream</code></a>로 로컬 파일을 Readable stream으로 가져와 S3로 업로드를 시도해보기로 했다.</p>
+<script src="https://gist.github.com/mooyoul/550326977415d9707fa6dccba9c0b634.js"></script>
+
+<p>그리고 테스트를 해보면…</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/file-stream-upload.png" alt="file stream으로 s3 업로드" title="file stream으로 s3 업로드">
+<p>잘 올라가는것을 확인할 수 있다.</p>
+<p>일단 여기서 AWS SDK이 Stream을 지원한다는건 검증한 셈이니, request쪽에서 <code>response</code> event를 통해 전달한 <code>response</code> stream에 문제가 있을거라고 예측할 수 있다.</p>
+<p>이를 검증하기 위해, 이번에는 <a href="https://nodejs.org/api/http.html#http_http_request_options_callback" target="_blank" rel="external"><code>http.request</code></a>의 shortcut인 <a href="https://nodejs.org/api/http.html#http_http_get_options_callback" target="_blank" rel="external"><code>http.get</code></a>을 통해 s3로 업로드를 시도했다.</p>
+<script src="https://gist.github.com/mooyoul/27599bba52fb49eac6afdd65d960b93d.js"></script>
+
+<p>역시 위 스니펫으로 테스트해보면…</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/http-request-upload.png" alt="잘된다!" title="잘된다!">
+<p>잘 되는것을 확인할 수 있다.<br>어쩄거나 <code>request</code> 패키지쪽에서 넘어오는 stream에 문제가 있는 것 같은데…</p>
+<h2 id="점점-더-미궁속으로"><a href="#점점-더-미궁속으로" class="headerlink" title="점점 더 미궁속으로"></a>점점 더 미궁속으로</h2><p>이것저것 테스트를 더 진행하던 와중에, 아래 스니펫이 정상 동작하는것을 확인하고 이슈는 더 미궁속으로 빠지기 시작했다.</p>
+<p>분명 <code>request</code> 쪽에서 넘겨주는 <code>response</code> stream에 문제가 있었던 것 같은데.<br>이슈가 발생하는 이전 스니펫에서 다운로드 받은 파일을 s3가 아닌 로컬 파일로 쓰게 하면 잘 되었기 때문이다.</p>
+<script src="https://gist.github.com/mooyoul/0b6fb0bfdf70b9194d5b15184c62cd63.js"></script>
+
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/write-to-local-file.png" alt="로컬 파일로 기록" title="로컬 파일로 기록">
+<p>도대체 무엇이 문제인걸까????</p>
+<h2 id="우연히-발견한-또-다른-재현-방법"><a href="#우연히-발견한-또-다른-재현-방법" class="headerlink" title="우연히 발견한 또 다른 재현 방법"></a>우연히 발견한 또 다른 재현 방법</h2><p>멘탈이 반쯤 나간 상태로 이것 저것 케이스를 더 만들어서 테스트를 해보다가, </p>
+<p>우연히 아래처럼 <code>response</code> stream을 다른 stream으로 pipe하는것을 지연했더니,<br><code>s3.upload</code>를 통해 업로드를 했던것과 동일하게 0바이트로 파일을 기록한 결과가 나왔다!</p>
+<script src="https://gist.github.com/mooyoul/22c30bc04aff53190564c63a6484da1e.js"></script>
+
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/write-to-local-file-delayed.png" alt="지연된 pipe 후 0바이트로 파일이 기록된 모습" title="지연된 pipe 후 0바이트로 파일이 기록된 모습">
+<p>여기서 request 대신 아까처럼 <a href="https://nodejs.org/api/http.html#http_http_get_options_callback" target="_blank" rel="external"><code>http.get</code></a>을 통해 pipe를 하면..</p>
+<script src="https://gist.github.com/mooyoul/cdfc66bf0613daa77022e84e92b1899e.js"></script>
+
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/write-to-local-file-delayed-http.png" alt="오예!" title="오예!">
+<p>이쪽은 잘 되는것을 확인할 수 있다.</p>
+<p>자, 이제 무엇이 문제인지 어느정도 추측해볼 수 있다.</p>
+<p>이번에 세운 가설은, <a href="https://github.com/request/request" target="_blank" rel="external"><code>request</code></a> 패키지에서 전달하는 <code>response</code> stream은<br>flowing mode로 동작한다는 것이다.</p>
+<p>즉 <code>s3.upload</code> API에서 stream에서 넘어오는 data를 읽어들이기 전에 이미 <code>response</code> 스트림에 모든 데이터가 전달되었고,<br>따로 이미 해당 스트림은 ‘흐르고 있는’ 모드라 그 데이터가 고스란히 유실된 것.</p>
+<p>이 부분을 조금 더 깊게 파보기 위해,<br>Node.js의 꽃 (?) 이라 할 수 있는 Stream에 대해 알아보자.</p>
+<h2 id="Node-js의-꽃-Stream"><a href="#Node-js의-꽃-Stream" class="headerlink" title="Node.js의 꽃, Stream"></a>Node.js의 꽃, Stream</h2><p>나는 Node.js에서 가장 매력적이고 핵심적인 부분이 바로 Stream이라 생각한다.</p>
+<p>과거 Node.js v0.10 까지는 Stream API에 상당히 많은 변화가 있었다.</p>
+<blockquote>
+<p>혹시라도 Stream를 아직 잘 모른다면, Node.js의 Contributor이자 npm Inc.의 owner인 <a href="https://github.com/isaacs" target="_blank" rel="external">Isaac Z. Schlueter</a>이<br><a href="http://playnode.io/2012/" target="_blank" rel="external">playnode 2012</a>에서 발표한 <a href="https://dl.dropboxusercontent.com/u/3685/presentations/streams2/streams2-ko.pdf" target="_blank" rel="external">Stream2 슬라이드</a>를 읽어보는 것을 강력하게 추천한다.<br>Node.js 공식 문서의 <a href="https://nodejs.org/api/stream.html" target="_blank" rel="external">Stream 섹션</a>을 참고해보는것도 아주 좋다.</p>
+</blockquote>
+<p>Node.js에서 Stream은 크게 네가지 종류로 분류된다.<br>Readable Stream, Writable Stream, Duplex Stream, Transform Stream.</p>
+<p>여기서 <code>request</code>나 <code>http.get</code>에서 반환하는 <code>response</code> stream은 Readable Stream에 해당하는데,</p>
+<p>Readable Stream의 예로는 우리가 흔히 접할 수 있는 것들을 나열하면 다음과 같다: </p>
+<p>1) client의 HTTP Request, server의 HTTP Request (<a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" target="_blank" rel="external">HTTP Class의 IncomingMessage</a>)<br>2) fs.createReadStream 으로 만든 fs readstream<br>3) zlib stream<br>4) crypto stream<br>5) tcp socket<br>6) child process의 stdout, stderr<br>7) process.stdio</p>
+<h2 id="Two-Modes"><a href="#Two-Modes" class="headerlink" title="Two Modes"></a>Two Modes</h2><p>Readable Stream에는 <a href="https://nodejs.org/api/stream.html#stream_two_modes" target="_blank" rel="external">두가지 모드</a>가 존재하는데,</p>
+<p><code>flowing</code> mode 혹은 <code>paused</code> mode 이다.</p>
+<p><code>flowing</code> mode에서는 EventEmitter 인터페이스를 통해 최대한 빠르게 데이터가 전달되고,<br><code>paused</code> mode에서는 명시적으로 <code>stream.read()</code> 메소드를 호출해 chunk를 읽어야 한다.</p>
+<p>기본적으로 Readable Stream은 paused mode이지만, 아래 세가지 방법을 통해 flowing mode로 전환할 수 있다.</p>
+<ol>
+<li><a href="https://nodejs.org/api/stream.html#stream_event_data" target="_blank" rel="external"><code>data</code></a> event handler 등록</li>
+<li><a href="https://nodejs.org/api/stream.html#stream_readable_resume" target="_blank" rel="external"><code>stream.resume()</code></a> 메소드 호출</li>
+<li><a href="https://nodejs.org/api/stream.html#stream_readable_pipe_destination_options" target="_blank" rel="external"><code>stream.pipe()</code></a>를 통해 Writable Stream으로 데이터 전달</li>
+</ol>
+<p>그리고 flowing mode의 Readble Stream은 아래 두가지 방법을 통해 다시 paused mode로 전환할 수 있다.</p>
+<ol>
+<li>pipe 된 대상 writable stream이 없는 상태라면, <a href="https://nodejs.org/api/stream.html#stream_readable_pause" target="_blank" rel="external"><code>stream.pause()</code></a> 메소드 호출</li>
+<li>pipe 된 대상 writable stream이 있는 상태라면, <a href="https://nodejs.org/api/stream.html#stream_event_data" target="_blank" rel="external"><code>data</code></a> event handler를 등록 해제하거나 기존에 pipe된 대상 writable stream을 <a href="https://nodejs.org/api/stream.html#stream_readable_unpipe_destination" target="_blank" rel="external"><code>stream.unpipe()</code></a> 메소드를 통해 파이프 해제</li>
+</ol>
+<h3 id="Three-States"><a href="#Three-States" class="headerlink" title="Three States"></a>Three States</h3><p>두가지 모드와 별개로 Readable Stream은 <a href="https://nodejs.org/api/stream.html#stream_three_states" target="_blank" rel="external">세가지 상태</a>가 존재한다.</p>
+<ul>
+<li><code>readable._readableState.flowing = null</code></li>
+<li><code>readable._readableState.flowing = false</code></li>
+<li><code>readable._readableState.flowing = true</code></li>
+</ul>
+<p><code>readable._readableState.flowing</code> 이 <code>null</code> 인 경우에는 스트림의 데이터를 소비할 어떠한 매커니즘 (<code>data</code> event handler를 등록하거나 <code>pipe</code> method를 통해 다른 writable stream 연결)이 없다는 것이다.<br>이 상태에서는 스트림이 데이터를 만들어내지 않는다.</p>
+<p>스트림에 <code>data</code> event listener를 등록하거나, <code>readable.pipe()</code> 메소드를 통해 writable stream을 파이프하거나,<br><code>readable.resume()</code> 메소드를 호출한다면 <code>readable._readableState.flowing</code>이 <code>true</code>으로 변경되고 스트림이 데이터를 생성할때마다 이벤트를 호출하기 시작할 것이다.</p>
+<p>마지막으로 <code>readable._readableState.flowing</code> 이 <code>false</code>인  동안에는, 버퍼링을 위해 데이터가 Stream 내부 버퍼에 축적될 것이다.</p>
+<p>그렇다면 위 <code>_readableState</code> property를 찍어보면 스트림이 어떤 상태에 있는지 추적해볼 수 있다.<br>다시 코드로 돌아가서, 아래처럼 <code>_readableState</code> property를 찍어보자.</p>
+<script src="https://gist.github.com/mooyoul/efe21b18fb513639abe9af5c7c0f5eb7.js"></script>
+
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request-response-stream-state.png" alt="`response` stream의 `flowing` state가 바뀌었다!" title="`response` stream의 `flowing` state가 바뀌었다!">
+<p>코드에서 스트림에 손도 안댔는데 <code>response</code> stream의 <code>flowing</code> state가 <code>null</code> 에서 <code>true</code>로 바뀐것을 볼 수 있다!</p>
+<p>아까 위에서 언급했지만, Readable Stream의 flowing state가 <code>true</code>인 경우 데이터가 흐르게되어 미리 데이터를 소비할 어떠한 매커니즘을 준비해두지 않는다면 이미 흘러서 나가버린 데이터는 살릴 방법이 없다.</p>
+<p>이제 정확히 무엇이 문제인지 알았다. </p>
+<p><strong><code>request</code> 패키지에서 전달하는 <code>response</code> stream은 paused &amp; buffered stream이 아니다!</strong></p>
+<p>자, 그럼 어떻게 <code>response</code> stream을 paused &amp; buffered stream으로 써멱냐고?<br>솔루션은 간단하다. 이미 stream에 이를 위한 좋은 (?) 구현체가 있다.</p>
+<p>Transform Stream의 구현체이기도 한 <a href="https://nodejs.org/api/stream.html#stream_class_stream_passthrough" target="_blank" rel="external"><code>Stream.PassThrough</code></a>가 바로 그것이다.<br>이름만 보고 유추할 수 있겠지만, 그냥 입력 받은 데이터를 다시 출력해주는 스트림이다.<br>다만, 기본적으로 paused state로 동작하고 buffering이 built-in 되어있어서 딱 지금 상황에 쓰기 적절하다.</p>
+<p>PassThrough를 쓰도록 처음 코드를 고치면 다음과 같다:</p>
+<script src="https://gist.github.com/mooyoul/738d7bfc1e56d4bb6088ff67d4d9f3b6.js"></script>
+
+<p>그리고 테스트를 해보면…. 두근두근…</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/upload-after-fixed.png" alt="잘 올라간다!" title="잘 올라간다!">
+<p>잘 고쳐진 것을 확인할 수 있다!!!!!</p>
+<h4 id="왜-Stream을-써야하나요"><a href="#왜-Stream을-써야하나요" class="headerlink" title="왜 Stream을 써야하나요?"></a>왜 Stream을 써야하나요?</h4><p>Download 100MB+ file &amp; upload to s3</p>
+<p><strong>using Buffer</strong></p>
+<script src="https://gist.github.com/mooyoul/3d4d0e9740cb0195b0483e1be5225c52.js"></script>
+
+<p><strong> vs </strong></p>
+<p><strong>using Stream</strong></p>
+<script src="https://gist.github.com/mooyoul/738d7bfc1e56d4bb6088ff67d4d9f3b6.js"></script>
+
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/buffer-vs-stream.png" alt="Buffer vs Stream" title="Buffer vs Stream">
+<h2 id="v-v-STREAM-ALL-THE-THINGS-YAY"><a href="#v-v-STREAM-ALL-THE-THINGS-YAY" class="headerlink" title="v(^_^)v STREAM ALL THE THINGS! (YAY)"></a>v(^_^)v STREAM ALL THE THINGS! (YAY)</h2><img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/stream-all-the-things.jpg" alt="STREAM ALL THE THINGS" title="STREAM ALL THE THINGS">
+<h2 id="request와-Streams2-Support"><a href="#request와-Streams2-Support" class="headerlink" title="request와 Streams2 Support"></a>request와 Streams2 Support</h2><p><code>request</code> 패키지의 Contributor인 <a href="https://github.com/mikeal" target="_blank" rel="external">Mikeal Rogers</a>의 <a href="https://github.com/request/request/issues/887#issuecomment-50506277" target="_blank" rel="external">코멘트</a>에 따르면,</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/mikeal.png" alt="mikeal의 코멘트" title="mikeal의 코멘트">
+<p>새로운 스타일의 Stream이 v3 브랜치에서 지원될 것 같아 보인다.</p>
+<p>하지만…</p>
+<img src="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/request-v3-branch.png" alt="마지막 업데이트의 상태가..?!" title="마지막 업데이트의 상태가..?!">
+<p>현재 v3 브랜치는 마지막 업데이트가 4년 전인 상태로, 사실상 방치중인 상태이다.<br>언젠가 Stream 관련 업데이트가 나올 때 까지는, 이 방법을 쓸 수밖에 없을 것 같다 ㅠㅠ</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/" class="article-date">
+  <time datetime="2017-02-17T18:37:01.000Z" itemprop="datePublished">2017-02-18</time>
+</a>
+
+        </li>
+        
+          <li>
+            <span class="label">Category:</span>
+            
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+
+          </li>
+        
+        
+          <li>
+            <span class="label">Tag:</span>
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/request/">request</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/s3/">s3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream/">stream</a></li></ul>
+
+
+          </li>
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2017/02/16/Setting-Timezone-on-AWS-Lambda/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AWS Lambda에서의 Timezone 설정</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>init 1 - MooYeol Prescott Lee</p>
+
+
+      </div>
+    </footer>
+
+      
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83917556-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+    </div>
+  </body>
+</html>
