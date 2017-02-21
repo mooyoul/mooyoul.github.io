@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>AWS Lambda 서울 리전 이전기 | init 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AWS Lambda 서울 리전 이전기현재 개발하고 있는 로톡에서는 Lambda를 쓰는 몇몇 서비스들이 있다.
+그 중 가장 사용 빈도가 높은 법률 분야 추천 API는 서울 리전에서 Lambda를 서비스 하기 전에 만들었던 것이라,도쿄 리전에 배포를 해서 사용을 하고 있었다.
+그동안 손댈일이 없어서 계속 도쿄 리전에 두고 있던 상태였는데, 몇몇 추천 파라미터">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS Lambda 서울 리전 이전기">
+<meta property="og:url" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/index.html">
+<meta property="og:site_name" content="init 1">
+<meta property="og:description" content="AWS Lambda 서울 리전 이전기현재 개발하고 있는 로톡에서는 Lambda를 쓰는 몇몇 서비스들이 있다.
+그 중 가장 사용 빈도가 높은 법률 분야 추천 API는 서울 리전에서 Lambda를 서비스 하기 전에 만들었던 것이라,도쿄 리전에 배포를 해서 사용을 하고 있었다.
+그동안 손댈일이 없어서 계속 도쿄 리전에 두고 있던 상태였는데, 몇몇 추천 파라미터">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/cover.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/analysis.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/overall-stack-by-region.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/unable-to-import-module.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/unable-to-import-module-2.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/debug.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/apex-slack.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/overall-stack.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/benchmark-tokyo.png">
+<meta property="og:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/benchmark-seoul.png">
+<meta property="og:updated_time" content="2017-02-21T20:51:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AWS Lambda 서울 리전 이전기">
+<meta name="twitter:description" content="AWS Lambda 서울 리전 이전기현재 개발하고 있는 로톡에서는 Lambda를 쓰는 몇몇 서비스들이 있다.
+그 중 가장 사용 빈도가 높은 법률 분야 추천 API는 서울 리전에서 Lambda를 서비스 하기 전에 만들었던 것이라,도쿄 리전에 배포를 해서 사용을 하고 있었다.
+그동안 손댈일이 없어서 계속 도쿄 리전에 두고 있던 상태였는데, 몇몇 추천 파라미터">
+<meta name="twitter:image" content="https://mooyoul.github.io/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/cover.png">
+  
+    <link rel="alternate" href="/atom.xml" title="init 1" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+</head>
+
+  
+    <body>
+  
+      <div id="container" class="container">
+        <article id="post-Moving-AWS-Lambda-functions-to-Seoul-region" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+  <nav id="main-nav" class="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/atom.xml">RSS</a>
+    
+      <a class="main-nav-link" href="https://github.com/mooyoul">Github</a>
+    
+      <a class="main-nav-link" href="https://www.linkedin.com/in/mooyoul">LinkedIn</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AWS Lambda 서울 리전 이전기
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/cover.png" alt="왼쪽이 도쿄 리전, 우측이 서울 리전" title="왼쪽이 도쿄 리전, 우측이 서울 리전">
+<h1 id="AWS-Lambda-서울-리전-이전기"><a href="#AWS-Lambda-서울-리전-이전기" class="headerlink" title="AWS Lambda 서울 리전 이전기"></a>AWS Lambda 서울 리전 이전기</h1><p>현재 개발하고 있는 <a href="https://www.lawtalk.co.kr" target="_blank" rel="external">로톡</a>에서는 Lambda를 쓰는 몇몇 서비스들이 있다.</p>
+<p>그 중 가장 사용 빈도가 높은 <strong>법률 분야 추천 API</strong>는 서울 리전에서 Lambda를 서비스 하기 전에 만들었던 것이라,<br>도쿄 리전에 배포를 해서 사용을 하고 있었다.</p>
+<p>그동안 손댈일이 없어서 계속 도쿄 리전에 두고 있던 상태였는데, 몇몇 추천 파라미터를 변경하게 되면서 서울 리전으로 이전하기로 했다.<br>한국 - 일본을 오가는게 영 찝찝했기 때문이다.</p>
+<h2 id="법률-분야-추천-API"><a href="#법률-분야-추천-API" class="headerlink" title="법률 분야 추천 API"></a>법률 분야 추천 API</h2><p>법률 분야 추천 API를 간략하게 소개하면,<br>입력받은 텍스트를 분석해 해당 텍스트가 어떤 법률 분야에 속할 수 있는지 추천하는 API이다.<br>(한때 머신러닝좀 배우겠다고 설쳐댔을때 내부 데모용으로 만들었던게 제품으로 들어갔다.)</p>
+<p>예를 들어,</p>
+<blockquote>
+<p>지난 금요일 밤 강남역의 한 술집에서 술을 마시다가 옆 테이블 일행과 시비가 붙었습니다.<br>상대방이 제 멱살을 잡자 제가 화가 너무 난 나머지 주먹질을 했고 전치 4주의 상해를 입혔습니다.<br>저는 어떤 처벌을 받게 되나요?</p>
+</blockquote>
+<p>라는 텍스트를 입력받으면 ‘폭행/협박’ 이라는 분야를 추천해 응답하는 것이다.<br>(사실 추천이라기 보다는 분류기에 가깝다.)</p>
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/analysis.png" alt="실제 해당 Lambda function의 output" title="실제 해당 Lambda function의 output">
+<h2 id="기존-구성"><a href="#기존-구성" class="headerlink" title="기존 구성"></a>기존 구성</h2><img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/overall-stack-by-region.png" alt="지리적 구분이 들어간 도식도" title="지리적 구분이 들어간 도식도">
+<p>구성은 별거 없다.<br>문제는 Lambda를 제외한 모든 리소스들이 서울에 있다는 것이다. 서울 안에서도 AWS랑 KT의 ucloud biz가 짬뽕되어 있다.</p>
+<p>API 서버에서 도쿄 리전에 있는 <code>analysis</code> function을 호출할때에도 지연이 있는데,<br>function 안에서 또 한국과 일본을 오가게 되어서 추가적인 지연이 생기게되어 더 느렸다.</p>
+<h2 id="서울-리전으로-배포-시도"><a href="#서울-리전으로-배포-시도" class="headerlink" title="서울 리전으로 배포 시도"></a>서울 리전으로 배포 시도</h2><p>기존에 이미 <a href="http://apex.run" target="_blank" rel="external">Apex</a>로 구성을 해둔터라 그냥 리전만 바꾸고 다시 배포를 시도했다.<br>베포는 문제가 없었는데… 테스트를 위해 함수를 호출해보니 에러가 뜬다… 읭?</p>
+<blockquote>
+<p>Error: function response: Cannot find module ‘debug’.</p>
+</blockquote>
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/unable-to-import-module.png" alt="CloudWatch Logs" title="CloudWatch Logs">
+<p>코드에 손도 안댔는데…. 문제가 생겼다.<br>logger로 <a href="https://github.com/visionmedia/debug" target="_blank" rel="external"><code>debug</code> 패키지</a>를 쓰는건 맞는데, 왜 안되는지 모르겠다. <code>apex build analysis &gt; built.zip</code> 으로 built zip을 떨구고 <code>unzip -l built.zip</code> 으로 확인해봐도 분명 <code>node_modules/debug</code>라는 경로에 파일은 있었다.</p>
+<p>혹시라도 AWS에서 <code>debug</code>란 패키지 네임을 쓰기 시작했나? 싶어서 <code>require(&#39;debug&#39;)</code>로 불러오던걸 무식하게 (?) <code>require(&#39;./node_modules/debug&#39;)</code>로 불러오도록 바꿔도 봤지만, 소용이 없었다.</p>
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/unable-to-import-module-2.png" alt="CloudWatch Logs" title="CloudWatch Logs">
+<p>시간은 자꾸만 흐르고 해결은 되지 않아서 Apex Slack에 푸념을 늘어놓던 와중….</p>
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/debug.png" alt="lol" title="lol">
+<p><a href="https://github.com/visionmedia/debug/commit/f42b9627922995561299b064fce56bd292abb030" target="_blank" rel="external"><code>debug</code> 패키지의 내부 스캐폴딩이 바뀐걸 발견했다….</a></p>
+<p>문제는 이렇게 생긴 것이었다:</p>
+<ol>
+<li>Apex의 <a href="http://apex.run/#function-hooks" target="_blank" rel="external">function build hook</a>에 <code>npm install &amp;&amp; npm update</code>가 들어있어서 빌드 전 debug 패키지가 자동으로 업데이트가 되었고,</li>
+<li>하필이면 <code>.apexignore</code> 에 babel이 transpile하는 원본 코드를 배포에 포함시키지 않게 하려고 <code>src/</code>가 들어있었는데,</li>
+<li><code>debug</code> 패키지의 내부 구성이 바뀌면서 <code>.apexignore</code>에 기재된 <code>src/</code> glob이 <code>node_modules/debug/src</code>를 매치시키면서 파일이 누락되어 배포 패키지가 만들어졌고</li>
+<li>깨졌다…</li>
+</ol>
+<p>(예전에 도쿄에 배포할땐 <code>debug</code> 패키지의 내부 구성이 변경되기 전이므로 영향을 받지 않았다.)</p>
+<p><code>.apexignore</code>에 들어있는 <code>src/</code> glob을 <code>./src/</code>로 바꾸고 다시 배포해보니 문제가 사라졌고, 기존처럼 그대로 잘 동작했다.</p>
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/apex-slack.png" alt="ㅋㅋㅋ" title="ㅋㅋㅋ">
+<p>아… 다시 생각해봐도 황당하다 ㅋㅋㅋㅋㅋㅋㅋ</p>
+<h2 id="서울-리전으로-배포-후"><a href="#서울-리전으로-배포-후" class="headerlink" title="서울 리전으로 배포 후"></a>서울 리전으로 배포 후</h2><img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/overall-stack.png" alt="Overall stack" title="Overall stack">
+<p>이제 모든 리소스들은 서울에 있다. 더이상 해외망을 오갈 필요가 없다!!!<br>서울 리전으로 무사히 이전하고 나서 서비스 안에서 이리저리 써보니 확실히 많이 빨라진걸 체감할 수 있었고,<br>벤치마크를 돌려봐도 많이 빨라진 것을 알수있다.</p>
+<p>아래는 간단하게 벤치마크를 돌려본 결과이다.<br>첫번째가 도쿄 리전, 두번째가 서울 리전이다.</p>
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/benchmark-tokyo.png" alt="도쿄 리전에서의 벤치마크" title="도쿄 리전에서의 벤치마크">
+<img src="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/benchmark-seoul.png" alt="서울 리전에서의 벤치마크" title="서울 리전에서의 벤치마크">
+
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2017/02/22/Moving-AWS-Lambda-functions-to-Seoul-region/" class="article-date">
+  <time datetime="2017-02-21T19:17:17.000Z" itemprop="datePublished">2017-02-22</time>
+</a>
+
+        </li>
+        
+          <li>
+            <span class="label">Category:</span>
+            
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/serverless/">serverless</a>
+  </div>
+
+
+          </li>
+        
+        
+          <li>
+            <span class="label">Tag:</span>
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apex/">apex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda/">lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+
+          </li>
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2017/02/18/Fixing-broken-stream-on-nodejs-request-package/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Node.js request 패키지의 망가진 Stream 고치기</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>init 1 - MooYeol Prescott Lee</p>
+
+
+      </div>
+    </footer>
+
+      
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83917556-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+    </div>
+  </body>
+</html>
