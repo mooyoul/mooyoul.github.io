@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mooyoul.github.io/"/>
-  <updated>2018-02-11T15:23:22.249Z</updated>
+  <updated>2018-02-11T18:55:12.955Z</updated>
   <id>https://mooyoul.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://mooyoul.github.io/2018/02/10/a-lookback-at-2017/"/>
     <id>https://mooyoul.github.io/2018/02/10/a-lookback-at-2017/</id>
     <published>2018-02-09T16:55:21.000Z</published>
-    <updated>2018-02-11T15:23:22.249Z</updated>
+    <updated>2018-02-11T18:55:12.955Z</updated>
     
     <content type="html"><![CDATA[<h1 id="뒤늦은-2017년-돌아보기"><a href="#뒤늦은-2017년-돌아보기" class="headerlink" title="뒤늦은 2017년 돌아보기"></a>뒤늦은 2017년 돌아보기</h1><p>2017년은 정말 많은 것들을 경험했던 한 해였다. 직장도 옮기고, 개발자로서 많은 경험을 했던 한 해였다.<br>평소에 연단위 회고는 쓰지 않는데, 올해는 이렇게 글로 남기고 싶은 경험이 많은 해여서 처음으로 회고를 남겨본다.</p>
 <p>그냥 1월부터 쭉 생각나는 이벤트만 정리해보면…</p>
@@ -126,6 +126,7 @@
 <h3 id="스팸-필터-개선"><a href="#스팸-필터-개선" class="headerlink" title="스팸 필터 개선"></a>스팸 필터 개선</h3><p>악랄한 스패머들이 스팸 필터를 우회해서 스팸 게시글을 올리는 빈도가 높아져서, 손을 한번 대기로 했다.<br>게시물을 분석할때 Headless Chrome을 쓰도록 구조를 변경했고, CIDR 기반 광역 차단, WHOIS 등록 정보, DNS 레코드 조회 등 복합적인 조건으로 스팸을 걸러내도록 구조를 개선했다. 다행히 아직까지는 새 스팸필터를 우회한 스패머는 없다. DNS나 WHOIS가 어떻게 동작하는지 공부한게 도움이 되어 뿌듯했다.</p>
 <p>이미지로 스패밍을 하는 유저도 있었는데, 이를 차단하기 위해 이미지 스팸 필터도 프로토타입을 만들었었다. 적용은 아직 안했지만…</p>
 <h3 id="AWS-re-invent-2017-참가"><a href="#AWS-re-invent-2017-참가" class="headerlink" title="AWS re:invent 2017 참가"></a>AWS re:invent 2017 참가</h3><img src="/2018/02/10/a-lookback-at-2017/reinvent.jpg" alt="AWS re:invent 2017" title="AWS re:invent 2017">
+<img src="/2018/02/10/a-lookback-at-2017/tuesday-night-live.jpg" alt="Tuesday Night Live" title="Tuesday Night Live">
 <p>컨퍼런스 참가로 생애 처음으로 한국 이외의 나라를 가보게 되었다.<br>ICN-SFO-LAS 루트로 라스베가스에서 열리는 AWS re:invent 2017 행사에 참가했다.</p>
 <p>엄청나게 많았던 새 기능 소개들, 엄청 큰 회사들의 best practices 세션들도 정말 좋았지만, 그중 가장 기억이 남는건 Chalk Talk으로 진행되던 <a href="https://www.portal.reinvent.awsevents.com/connect/sessionDetail.ww?SESSION_ID=18209" target="_blank" rel="external">실시간 비디오 프레임 분석 &amp; 알림</a> 세션이였다. 작은 방에서 30명정도가 참석해 듣는 세션이였는데, 슬라이드 중간 중간 질문을 던지는 방법 (e.g. 이 구조에서는 무엇이 문제인가? frame analysis interval을 너무 짧게 잡으면 무엇이 문제인가? 반대로 길게 잡으면 무엇이 문제인가?) 으로  Follow-up을 잘 해주어서 더 인상이 많이 남았다. 그리고 강연자와 1:1으로 질문/답변을 하지 않고, 주변 사람들이랑 아주 자연스럽게 토론할 수 있는 분위기가 너무 좋았다.</p>
 <p>아, 그리고 인상깊었던 슬라이드가 하나 있다.<br>Amazon CTO인 Werner vogels의 슬라이드가 끝나면서 나온 슬라이드인데,<br>“그래서 미래는 어떤 모습이죠?” 라는 질문에 대한 답이다.</p>
@@ -138,6 +139,7 @@
 <img src="/2018/02/10/a-lookback-at-2017/with_tom.jpg" alt="Tom에게 휴가 관리 시스템을 설명하고 있는 나" title="Tom에게 휴가 관리 시스템을 설명하고 있는 나">
 <p>그리고 행사 전날 스트립의 한 레스토랑에서 Tom을 만났고, 그날 되지도 않는 영어로 온갖 개발 이야기를 했다. Serverless에 대한 찬양을 시작으로, 위에서 만든 휴가 관리 시스템의 코드, 그리고 자기네 CTO에 대한 잡담까지 짧은 시간이었지만 많은 이야기를 나눌 수 있었다. 되지도 않는 영어로 어떻게든 이야기하는게 정말 어려웠지만, 그래도 Tom이 이야기를 잘 들어주어서 너무 고마웠다.</p>
 <p>엑스포에서도 많은 기업들의 부스를 돌아다니며 평소 궁금했던것들을 마음껏 물어보았다.<br>nginx 부스에 가서는 amplify를 잘 쓰고 있다고 감사를 표했는데, nginx 엔지니어가 amplify를 사용하는 유저가 많이 없는데 잘 써주어서 오히려 우리에게 너무 고맙다고 했다.<br>불편한게 없는지도 물어보고, 버그를 리포트했더니 정말 고마워했다. 오히려 amplify를 공짜로 쓸 수 있는 우리가 고마운데…</p>
+<img src="/2018/02/10/a-lookback-at-2017/github-booth.jpg" alt="Github booth at re:invent expo" title="Github booth at re:invent expo">
 <p>그리고 github 부스에 가서 평소에 엄청 물어보고 싶었던 질문을 던지고 왔다.<br>프론트 개발을 하다보면 간혹 일부 예제에서 <code>raw.githubcontent.com</code> 도메인으로 JS나 CSS와 같은 정적 컨텐츠를 땡겨쓰는걸 볼 수 있고, 심지어는 일부 웹사이트에서는 그걸 CDN 마냥 쓰는 곳이 있는데. 여기에 대해서 어떻게 생각하는지가 궁금했다.</p>
 <p>다행히도 Github 엔지니어는 내 질문을 재미있다고 하시곤 답변을 해주셨는데, 이미 Github 내부에서는 해당 트래픽이 엄청난걸 알고 있고, 그 수준이 DDoS 공격을 받는것과 비슷한 수준이며, 다행히 내부적으로 API 호출을 하는 것이라 Rate Limit이 존재하며, Bandwidth 제한 또한 걸려있다고 답변을 해주셨다. 그리고 자기도 왜 사람들이 그렇게 리소스를 링크해서 쓰는지 전혀 이해가 안가는데 너는 혹시 이유를 알고있냐고 ㅋㅋㅋ 재치있는 답변을 해주셨다.</p>
 <p>만약 올해에도 re:invent 행사를 간다면 더 많은 사람들을 만나서, 더 많은 이야기를 해보고싶다. 일주일의 짧은 일정이었지만 많은 것들을 느끼고 배울 수 있었던 시간이었다.</p>
