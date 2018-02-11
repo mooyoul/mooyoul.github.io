@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mooyoul.github.io/"/>
-  <updated>2018-02-11T18:55:12.955Z</updated>
+  <updated>2018-02-11T18:56:36.690Z</updated>
   <id>https://mooyoul.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://mooyoul.github.io/2018/02/10/a-lookback-at-2017/"/>
     <id>https://mooyoul.github.io/2018/02/10/a-lookback-at-2017/</id>
     <published>2018-02-09T16:55:21.000Z</published>
-    <updated>2018-02-11T18:55:12.955Z</updated>
+    <updated>2018-02-11T18:56:36.690Z</updated>
     
     <content type="html"><![CDATA[<h1 id="뒤늦은-2017년-돌아보기"><a href="#뒤늦은-2017년-돌아보기" class="headerlink" title="뒤늦은 2017년 돌아보기"></a>뒤늦은 2017년 돌아보기</h1><p>2017년은 정말 많은 것들을 경험했던 한 해였다. 직장도 옮기고, 개발자로서 많은 경험을 했던 한 해였다.<br>평소에 연단위 회고는 쓰지 않는데, 올해는 이렇게 글로 남기고 싶은 경험이 많은 해여서 처음으로 회고를 남겨본다.</p>
 <p>그냥 1월부터 쭉 생각나는 이벤트만 정리해보면…</p>
@@ -215,6 +215,14 @@
     
     </summary>
     
+      <category term="diary" scheme="https://mooyoul.github.io/categories/diary/"/>
+    
+    
+      <category term="serverless" scheme="https://mooyoul.github.io/tags/serverless/"/>
+    
+      <category term="aws" scheme="https://mooyoul.github.io/tags/aws/"/>
+    
+      <category term="lambda" scheme="https://mooyoul.github.io/tags/lambda/"/>
     
   </entry>
   
